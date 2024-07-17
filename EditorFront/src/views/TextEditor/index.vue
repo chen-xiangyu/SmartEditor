@@ -123,11 +123,23 @@
           <img src="./logo.png" alt="Logo" class="logo" />
         </el-menu-item>
         <div class="flex-grow" />
-        <el-menu-item @click="gotoUserProfile()">
-          个人中心
-          <svg class="remix">
-            <use :xlink:href="`${remixiconUrl}#ri-${'arrow-right-s-line'}`" />
-          </svg>
+        <el-menu-item>
+          <el-dropdown>
+            <template #default>
+            <span class="el-dropdown-link">
+              你好, {{ username }}
+              <svg class="remix">
+                <use :xlink:href="`${remixiconUrl}#ri-${'arrow-down-s-line'}`" />
+              </svg>
+            </span>
+            </template>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item @click="gotoUserProfile()">个人中心</el-dropdown-item>
+                <el-dropdown-item @click="logout()">退出登录</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
         </el-menu-item>
       </el-menu>
     </el-header>
@@ -314,7 +326,8 @@
 
   const fileContRef = ref(null)
   const visibleMenu = ref(false)
-  const visibleCard = ref(false)
+const visibleCard = ref(false)
+  const username = ref(localStorage.getItem('account'))
   const cardRef = ref()
   const menuRef = ref()
   const cardMsg = ref("")
@@ -465,6 +478,14 @@
       path: '/user-profile',
     })
   }
+
+  function logout()
+  {
+    localStorage.removeItem('account')
+    localStorage.removeItem('token')
+    router.push("/login")
+  }
+
 
   const visibleUploadDialog = ref(false)
   const uploadUrl = ref("")
@@ -771,6 +792,12 @@ onUnmounted(() => {
     top: 0;
     left: 0;
     z-index: 1000; /* 确保位于其他内容之上 */
+  }
+
+  .el-dropdown-link {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
   }
 
   .context-menu {
