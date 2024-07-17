@@ -117,7 +117,7 @@
       可视化图表
     </el-dialog> -->
 
-    <el-header>
+    <el-header :class="{'expanded-menu' : isExpanded}">
       <el-menu mode="horizontal" :ellipsis="false">
         <el-menu-item class="logo-item">
           <img src="./logo.png" alt="Logo" class="logo" />
@@ -161,7 +161,7 @@
 </template>
 
 <script setup lang="ts" name="TextEditor">
-  import { ref, reactive, computed } from "vue"
+  import { ref, reactive, computed, onMounted, onUnmounted } from "vue"
   import { useEditor, EditorContent, Editor } from "@tiptap/vue-3"
   import StarterKit from '@tiptap/starter-kit'
   import Highlight from '@tiptap/extension-highlight'
@@ -828,6 +828,17 @@
       console.error('POST 请求失败：', error)
     }
   }
+
+const isExpanded = ref(false);
+const handleScroll = () => {
+  isExpanded.value = window.scrollY > 0;
+};
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+});
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+});
 </script>
 
 <style lang="scss" scoped>
@@ -885,6 +896,14 @@
 
   .logo{
     height: 50px; /* 调整logo的高度 */
+  }
+
+  .expanded-menu {
+    width: 100vw; /* 100% viewport width */
+    position: fixed; /* 固定在页面顶部 */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* 确保位于其他内容之上 */
   }
 
   .context-menu {
