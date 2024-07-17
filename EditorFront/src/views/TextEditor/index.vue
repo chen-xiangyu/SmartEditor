@@ -120,7 +120,7 @@
     <el-header :class="{'expanded-menu' : isExpanded}">
       <el-menu mode="horizontal" :ellipsis="false">
         <el-menu-item class="logo-item">
-          <img src="./logo.png" alt="Logo" class="logo" />
+          <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
         </el-menu-item>
         <div class="flex-grow" />
         <el-menu-item>
