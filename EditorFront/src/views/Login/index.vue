@@ -15,7 +15,7 @@
     align-items: center; /* 垂直居中 */
     height: 100vh;
     width: 100vw;
-    background-image: url('@/assets/images/background.jpg');
+    background-image: url('@/assets/images/background.png');
     background-size: 100% 100%; /* 设置背景图片宽度和高度均为100% */
     background-position: center; /* 控制背景图片的位置，center表示居中 */
     background-repeat: no-repeat; /* 防止背景图片重复 */

@@ -108,15 +108,6 @@
       </div>
     </el-dialog>
 
-    <!-- <el-dialog
-      v-model="visibleChart"
-      title="可视化图表"
-      width="50%"
-      @close="visibleChart = false"
-    >
-      可视化图表
-    </el-dialog> -->
-
     <el-header :class="{'expanded-menu' : isExpanded}">
       <el-menu mode="horizontal" :ellipsis="false">
         <el-menu-item class="logo-item">
