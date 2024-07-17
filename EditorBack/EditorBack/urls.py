@@ -46,5 +46,8 @@ urlpatterns = [
     path('make-bar/', views.makeBar),
     path('make-mind-map/', views.makeMindMap),
     path('auto-typography/', views.autoTypography),
+    path('make-pie/', views.makePie),
+    path('make-line/', views.makeLine),
+    path('make-scatter/', views.makeScatter),
 
 ]

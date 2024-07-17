@@ -261,7 +261,7 @@ def codeEdit(request):
 @csrf_exempt
 def makeBar(request):
     if request.method == "POST":
-        print(request.POST.get("question"))
+        # print(request.POST.get("question"))
         # prompt = """
         #     假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
         #     图表的类型为柱状图，图中元素不要相互遮挡，最左侧和最右侧的元素不要超出边界和坐标轴，留一下段距离
@@ -277,6 +277,54 @@ def makeBar(request):
         print(json.loads(utils.getJson(response.get_result())))
         return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
         # return JsonResponse({"status": True, "answer": "ok"})
+    return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def makePie(request):
+    if request.method == "POST":
+        prompt = """
+            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
+            图表的类型为饼图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
+            json 文件的格式，
+        """
+        response = utils.getAIResponse(request, prompt)
+        return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
+    return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def makeLine(request):
+    if request.method == "POST":
+        prompt = """
+            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
+            图表的类型为折线图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
+            json 文件的格式，
+        """
+        response = utils.getAIResponse(request, prompt)
+        return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
+    return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def makeScatter(request):
+    if request.method == "POST":
+        prompt = """
+            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
+            图表的类型为散点图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
+            json 文件的格式（不要在json对象中写注释），数据结构类似这样，
+            {
+              xAxis: {
+                data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+              },
+              yAxis: {},
+              series: [
+                {
+                  type: 'scatter',
+                  data: [220, 182, 191, 234, 290, 330, 310]
+                }
+              ]
+            }
+        """
+        response = utils.getAIResponse(request, prompt)
+        return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
     return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt

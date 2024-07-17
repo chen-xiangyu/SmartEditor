@@ -708,7 +708,7 @@
       let res = response.data
       if (res.status){
         console.log(res.answer)
-        const chartStrs: string[] = ["make-bar"]
+        const chartStrs: string[] = ["make-bar", "make-pie", "make-line", "make-scatter"]
         if (chartStrs.includes(uploadUrl.value)) {
           handleAIChart(res.answer)
         } else if (uploadUrl.value === "make-mind-map") {

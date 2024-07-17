@@ -326,6 +326,36 @@
       }
     },
     {
+      icon: "pie-chart-2-fill",
+      title: "生成饼图",
+      action: props.showTextInput,
+      params: {
+        url: "make-pie",
+        prompt: "请您简要描述您的需求和数据，AI助手将会为您生成一张对应的饼图",
+        title: "生成饼图",
+      }
+    },
+    {
+      icon: "line-chart-line",
+      title: "生成折线图",
+      action: props.showTextInput,
+      params: {
+        url: "make-line",
+        prompt: "请您简要描述您的需求和数据，AI助手将会为您生成一张对应的折线图",
+        title: "生成折线图",
+      }
+    },
+    {
+      icon: "bubble-chart-fill",
+      title: "生成散点图",
+      action: props.showTextInput,
+      params: {
+        url: "make-scatter",
+        prompt: "请您简要描述您的需求和数据，AI助手将会为您生成一张对应的散点图",
+        title: "生成散点图",
+      }
+    },
+    {
       icon: "mind-map",
       title: "生成思维导图",
       action: props.showTextInput,
