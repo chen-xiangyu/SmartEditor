@@ -27,11 +27,9 @@ formatNote = """
 def signUp(request):
     # 注册
     if request.method == "POST":
-        data = json.loads(request.body)
-        account = data.get("account")
-        password = data.get("password")
+        account = request.POST.get("account")
+        password = request.POST.get("password")
         print(account, password)
-
         if User.objects.filter(account=account).exists():
             return JsonResponse({"status": False, 'etype': 1, "error": "账号已存在"})
 
@@ -39,8 +37,6 @@ def signUp(request):
         user = User(name="user" + account, account=account, password=hashed_password)
         user.save()
 
-        # request.session["user_info"] = {"id": user.id, "name": user.name}
-        # request.session.set_expiry(60 * 60 * 3)
         params = {
             "status": True,
             "message": "注册成功",
@@ -54,18 +50,14 @@ def signUp(request):
 def signIn(request):
     # 登录
     if request.method == "POST":
-        data = json.loads(request.body)
-        account = data.get("account")
-        password = data.get("password")
+        account = request.POST.get("account")
+        password = request.POST.get("password")
         print(account, password)
-
         if not User.objects.filter(account=account).exists():
             return JsonResponse({"status": False, "etype": 1, "error": "账号不存在"})
 
         user = User.objects.get(account=account)
         if check_password(password, user.password):
-            # request.session["user_info"] = {"id": user.id, "name": user.name}
-            # request.session.set_expiry(60 * 60 * 3)
             params = {
                 "status": True,
                 "message": "登录成功",
@@ -95,8 +87,7 @@ def getUserProfile(request):
 def setAccessToken(request):
     if request.method == "POST":
         account = request.META.get('HTTP_ACCOUNT')
-        data = json.loads(request.body)
-        access_token = data.get('accessToken')
+        access_token = request.POST.get('accessToken')
 
         user = User.objects.get(account=account)
         user.accessToken = access_token
@@ -112,12 +103,10 @@ def setAccessToken(request):
 @csrf_exempt
 def modifyPassword(request):
     if request.method == "POST":
-        data = json.loads(request.body)
         account = request.META.get('HTTP_ACCOUNT')
-        old_password = data.get("oldPassword")
-        new_password = data.get("newPassword")
-        print(old_password, new_password)
-
+        old_password = request.POST.get("oldPassword")
+        new_password = request.POST.get("newPassword")
+        # print(old_password, new_password)
         if not User.objects.filter(account=account).exists():
             return JsonResponse({"status": False, "etype": 1, "error": "账号不存在"})
 
@@ -135,8 +124,6 @@ def modifyPassword(request):
         else:
             return JsonResponse({"status": False, "etype": 2, "error": "密码错误"})
     return JsonResponse({"status": False, "etype": 0, "error": "请求方法错误"})
-
-
 
 @csrf_exempt
 def translate(request):

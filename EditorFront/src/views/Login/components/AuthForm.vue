@@ -14,18 +14,18 @@
       </el-form-item>
       <el-form-item>
         <template v-if="isSignUp">
-          <el-button type="primary" @click="signUp(formRef)">
+          <el-button type="primary" @click="signUp(formRef)" class="btn">
             注册
           </el-button>
-          <el-button type="info" @click="isSignUp = false, clearInput()">
+          <el-button type="info" @click="isSignUp = false, clearInput()" class="btn">
             去登录
           </el-button>
         </template>
         <template v-else>
-          <el-button type="primary" @click="signIn(formRef)">
+          <el-button type="primary" @click="signIn(formRef)" class="btn">
             登录
           </el-button>
-          <el-button type="info" @click="isSignUp = true, clearInput()">
+          <el-button type="info" @click="isSignUp = true, clearInput()" class="btn">
             去注册
           </el-button>
         </template>
@@ -39,7 +39,6 @@
   import type { FormInstance, FormRules } from 'element-plus'
   import axios from 'axios'
   import {RouterView,RouterLink,useRouter} from 'vue-router'
-  import { json } from 'stream/consumers';
 
   const router = useRouter()
   let isSignUp = ref(false)
@@ -94,12 +93,11 @@
 
     formEl.validate(async (valid) => {
       if (valid) {
-        let data = {
-          account: formInfo.account,
-          password: formInfo.password,
-        }
+        const formData = new FormData()
+        formData.append('account', formInfo.account)
+        formData.append('password', formInfo.password)
         console.log('submit!')
-        let res = await sendRequest(data, '/sign-up/')
+        let res = await sendRequest(formData, '/sign-up/')
         console.log("sign up", res)
         if (res.status) 
         {
@@ -124,12 +122,11 @@
 
     formEl.validate(async (valid) => {
       if (valid) {
-        let data = {
-          account: formInfo.account,
-          password: formInfo.password,
-        }
+        const formData = new FormData()
+        formData.append('account', formInfo.account)
+        formData.append('password', formInfo.password)
         console.log('submit!')
-        let res = await sendRequest(data, '/sign-in/')
+        let res = await sendRequest(formData, '/sign-in/')
         console.log("sign in", res)
         if (res.status) 
         {
@@ -150,14 +147,14 @@
     })
   }
 
-  async function sendRequest(data: any, url: any) {
+  async function sendRequest(formData: any, url: any) {
     accountError.value = ''
     passwordError.value = ''
     try {
-      console.log("开始发请求", data)
+      console.log("开始发请求")
       const response = await axios.post(
         url,
-        JSON.stringify(data),
+        formData,
       )
       console.log('POST 请求成功：', response.data)
       return response.data
@@ -170,22 +167,27 @@
   
 <style lang="scss" scoped>
   .account {
-    width: 400px;
-    border: 1px solid #dddddd;
+    width: 25%;
+    // border: 1px solid #dddddd;
     border-radius: 30px;
     box-shadow: 10px 10px 20px #aaa;
 
-    float: right;
-    margin-right: 100px;
-    margin: 100px auto;
-    padding: 20px 40px;
+    // float: right;
+    // margin-right: 100px;
+    // margin: 100px auto;
+    padding: 10px 30px;
+    background-color: rgba(255, 255, 255, 0.7);
   }
 
   .account h2 {
     margin-top: 10px;
     margin-bottom: 15px;
     text-align: center;
-    font-size: 2em;
+    font-size: 2rem;
     font-family: 'KaiTi', sans-serif;
+  }
+
+  .btn {
+    margin: 0px auto;
   }
 </style>
