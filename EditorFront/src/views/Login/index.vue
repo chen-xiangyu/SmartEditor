@@ -1,5 +1,7 @@
 <template>
-  <AuthForm/>
+  <div class="container">
+    <AuthForm/>
+  </div>
 </template>
 
 <script lang="ts" setup name="Login">
@@ -73,15 +75,23 @@
 </script>
 
 <style lang="scss" scoped>
+  .container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
   .account {
     width: 400px;
     border: 1px solid #dddddd;
     border-radius: 30px;
     box-shadow: 10px 10px 20px #aaa;
-
-    float: right;
-    margin-right: 100px;
-    margin-top: 100px;
+    margin: 0 auto;
+    float: none;
+    // float: right;
+    // margin-right: 100px;
+    // margin-top: 100px;
     padding: 20px 40px;
   }
 
@@ -92,5 +102,4 @@
     font-size: 2em;
     font-family: 'KaiTi', sans-serif;
   }
-
 </style>
