@@ -8,7 +8,24 @@
         <el-col :span="12">
           <!-- <MenuGroup :title="'高亮标记:'" :items="highlightItems"/> -->
           <MenuGroup :title="'层次排版:'" :items="headerItems"/>
-         
+          <template v-for="item in templateItems">
+            <el-tooltip
+              class="box-item"
+              effect="dark"
+              :content="item.title"
+              placement="top"
+              hide-after="10"
+            >
+              <button 
+                class="menu-item"
+                @click="item.action(item.data)"
+                >
+                <svg class="remix">
+                  <use :xlink:href="`${remixiconUrl}#ri-${item.icon}`" />
+                </svg>
+              </button>
+            </el-tooltip>
+          </template>
         </el-col>
       </el-row>
         
@@ -48,6 +65,7 @@
   import { Editor } from '@tiptap/vue-3'
   import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
   import MenuGroup from './MenuGroup.vue'
+  import { templateData } from "./templateData"
 
   const imageFileInput = ref()
 
@@ -190,6 +208,81 @@
       title: '六级标题',
       action: () => props.editor?.chain().focus().toggleHeading({ level: 6 }).run(),
       isActive: () => props.editor?.isActive('heading', { level: 6})
+    },
+  ]
+
+  const templateItems = [
+    {
+      icon: 'number-1',
+      title: templateData.template1.title,
+      data: templateData.template1.data,
+      action: (param: string) => {
+        props.editor?.commands.insertContent(param)
+      }
+    },
+    {
+      icon: 'number-2',
+      title: templateData.template2.title,
+      data: templateData.template2.data,
+      action: (param: string) => {
+        props.editor?.commands.insertContent(param)
+      }
+    },
+    {
+      icon: 'number-3',
+      title: templateData.template3.title,
+      data: templateData.template3.data,
+      action: (param: string) => {
+        props.editor?.commands.insertContent(param)
+      }
+    },
+    {
+      icon: 'number-4',
+      title: templateData.template4.title,
+      data: templateData.template4.data,
+      action: (param: string) => {
+        props.editor?.commands.insertContent(param)
+      }
+    },
+    {
+      icon: 'number-5',
+      title: templateData.template5.title,
+      data: templateData.template5.data,
+      action: (param: string) => {
+        props.editor?.commands.insertContent(param)
+      }
+    },
+    {
+      icon: 'number-6',
+      title: templateData.template6.title,
+      data: templateData.template6.data,
+      action: (param: string) => {
+        props.editor?.commands.insertContent(param)
+      }
+    },
+    {
+      icon: 'number-7',
+      title: templateData.template7.title,
+      data: templateData.template7.data,
+      action: (param: string) => {
+        props.editor?.commands.insertContent(param)
+      }
+    },
+    {
+      icon: 'number-8',
+      title: templateData.template8.title,
+      data: templateData.template8.data,
+      action: (param: string) => {
+        props.editor?.commands.insertContent(param)
+      }
+    },
+    {
+      icon: 'number-9',
+      title: templateData.template9.title,
+      data: templateData.template9.data,
+      action: (param: string) => {
+        props.editor?.commands.insertContent(param)
+      }
     },
   ]
 
