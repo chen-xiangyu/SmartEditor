@@ -795,6 +795,8 @@ onUnmounted(() => {
   }
 
   .el-dropdown-link {
+    border: none !important;
+    outline: none !important;
     cursor: pointer;
     display: flex;
     align-items: center;
