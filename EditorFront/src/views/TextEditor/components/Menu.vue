@@ -8,7 +8,7 @@
         <el-col :span="12">
           <!-- <MenuGroup :title="'高亮标记:'" :items="highlightItems"/> -->
           <MenuGroup :title="'层次排版:'" :items="headerItems"/>
-          <template v-for="item in templateItems">
+          <!-- <template v-for="item in templateItems">
             <el-tooltip
               class="box-item"
               effect="dark"
@@ -25,7 +25,37 @@
                 </svg>
               </button>
             </el-tooltip>
-          </template>
+          </template> -->
+          <el-dropdown class="drop-down">
+            <button
+              class="menu-item"
+            >
+              <svg class="remix">
+                <use :xlink:href="`${remixiconUrl}#ri-${'file-list-fill'}`" />
+              </svg>
+            </button>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item 
+                  v-for="item in templateItems" 
+                  class="dropdown-item"
+                  @click="item.action(item.params?.data as string)"
+                >
+                  <el-popover
+                    placement="left"
+                    width="200"
+                    trigger="hover"
+                    :popper-style="{ boxShadow: 'rgb(14 18 22 / 35%) 0px 10px 38px -10px, rgb(14 18 22 / 20%) 0px 10px 20px -15px', padding: '10px' }"
+                  >
+                    <template #reference>
+                      <span class="dropdown-text">{{ item.params?.title }}</span>
+                    </template>
+                    <img :src="item.params.path" class="popover-image" alt="description">
+                  </el-popover>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
         </el-col>
       </el-row>
         
@@ -214,72 +244,63 @@
   const templateItems = [
     {
       icon: 'number-1',
-      title: templateData.template1.title,
-      data: templateData.template1.data,
+      params: templateData.template1,
       action: (param: string) => {
         props.editor?.commands.insertContent(param)
       }
     },
     {
       icon: 'number-2',
-      title: templateData.template2.title,
-      data: templateData.template2.data,
+      params: templateData.template2,
       action: (param: string) => {
         props.editor?.commands.insertContent(param)
       }
     },
     {
       icon: 'number-3',
-      title: templateData.template3.title,
-      data: templateData.template3.data,
+      params: templateData.template3,
       action: (param: string) => {
         props.editor?.commands.insertContent(param)
       }
     },
     {
       icon: 'number-4',
-      title: templateData.template4.title,
-      data: templateData.template4.data,
+      params: templateData.template4,
       action: (param: string) => {
         props.editor?.commands.insertContent(param)
       }
     },
     {
       icon: 'number-5',
-      title: templateData.template5.title,
-      data: templateData.template5.data,
+      params: templateData.template5,
       action: (param: string) => {
         props.editor?.commands.insertContent(param)
       }
     },
     {
       icon: 'number-6',
-      title: templateData.template6.title,
-      data: templateData.template6.data,
+      params: templateData.template6,
       action: (param: string) => {
         props.editor?.commands.insertContent(param)
       }
     },
     {
       icon: 'number-7',
-      title: templateData.template7.title,
-      data: templateData.template7.data,
+      params: templateData.template7,
       action: (param: string) => {
         props.editor?.commands.insertContent(param)
       }
     },
     {
       icon: 'number-8',
-      title: templateData.template8.title,
-      data: templateData.template8.data,
+      params: templateData.template8,
       action: (param: string) => {
         props.editor?.commands.insertContent(param)
       }
     },
     {
       icon: 'number-9',
-      title: templateData.template9.title,
-      data: templateData.template9.data,
+      params: templateData.template9,
       action: (param: string) => {
         props.editor?.commands.insertContent(param)
       }
@@ -533,7 +554,8 @@
 
   .menu-item {
     background: transparent;
-    border: none;
+    border: none !important;
+    outline: none !important;
     border-radius: 0.4rem;
     color: #333;
     cursor: pointer;
@@ -552,6 +574,38 @@
     &:hover {
       background-color: #d6d6d6;
     }
+  }
+
+  .dropdown-item {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    background-color: #ffffff;
+    color: #333;
+    border-radius: 4px;
+    margin: 5px 0;
+  }
+
+  .dropdown-text {
+    font-family: "KaiTi", "楷体", "STKaiti", "楷体_GB2312", serif; /* 设置楷体字体 */;
+    font-size: 21px;
+    color: #333;
+    transition: color 0.3s ease;
+    margin: 8px 5px;
+  }
+
+  .dropdown-text:hover {
+    color: #007bff; /* Change to your preferred hover color */
+  }
+  .popover-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
   }
 </style>
 

@@ -1,7 +1,6 @@
-import { timeLog } from "console";
-
 export const templateData = {
     template1: {
+        path: new URL('./images/template1.png', import.meta.url).href,
         title: "个人简历模版",
         data:  `# 个人简历
 
@@ -56,6 +55,7 @@ export const templateData = {
 `
 },
     template2: {
+        path: new URL('./images/template2.png', import.meta.url).href,
         title: "会议演讲模版",
         data: `# 会议演讲
 
@@ -90,6 +90,7 @@ export const templateData = {
 `
     },
     template3: {
+        path: new URL('./images/template3.png', import.meta.url).href,
         title: "技术文档模版",
         data:`# 技术文档
 
@@ -132,6 +133,7 @@ export const templateData = {
 `
     },
     template4: {
+        path: new URL('./images/template4.png', import.meta.url).href,
         title: "学术论文模版",
         data: `# 学术论文
 
@@ -164,6 +166,7 @@ export const templateData = {
 `
     },
     template5: {
+        path: new URL('./images/template5.png', import.meta.url).href,
         title: "产品说明书模版",
         data: `# 产品说明书
 
@@ -207,6 +210,7 @@ export const templateData = {
 `
     },
     template6: {
+        path: new URL('./images/template6.png', import.meta.url).href,
         title: "新闻报道模版",
         data: `# 新闻报道
 
@@ -246,6 +250,7 @@ export const templateData = {
 `
     },
     template7: {
+        path: new URL('./images/template7.png', import.meta.url).href,
         title: "奖学金申请模板",
         data: `# 奖学金申请
       
@@ -287,8 +292,9 @@ export const templateData = {
 `
 },
     template8: {
-    title: "实习报告模板",
-    data: `# 实习报告
+        path: new URL('./images/template8.png', import.meta.url).href,
+        title: "实习报告模板",
+        data: `# 实习报告
 
 ## 实习背景
 ### 实习单位
@@ -322,6 +328,7 @@ export const templateData = {
 `
 },
     template9: {
+        path: new URL('./images/template9.png', import.meta.url).href,
         title: "课程反馈模板",
         data: `# 课程反馈
 
