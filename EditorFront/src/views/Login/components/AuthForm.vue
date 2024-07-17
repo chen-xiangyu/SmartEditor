@@ -177,7 +177,7 @@
 
     float: right;
     margin-right: 100px;
-    margin-top: 100px;
+    margin: 100px auto;
     padding: 20px 40px;
   }
 

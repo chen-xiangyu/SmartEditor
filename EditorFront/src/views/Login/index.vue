@@ -75,11 +75,15 @@
 </script>
 
 <style lang="scss" scoped>
-  .container{
+  .container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end; /* 将元素靠右对齐 */
+    align-items: center; /* 垂直居中 */
     height: 100vh;
+    background-image: url('@/assets/images/background.jpg');
+    background-size: 100% 100%; /* 设置背景图片宽度和高度均为100% */
+    background-position: center; /* 控制背景图片的位置，center表示居中 */
+    background-repeat: no-repeat; /* 防止背景图片重复 */
   }
 
   .account {
@@ -87,12 +91,10 @@
     border: 1px solid #dddddd;
     border-radius: 30px;
     box-shadow: 10px 10px 20px #aaa;
-    margin: 0 auto;
-    float: none;
-    // float: right;
-    // margin-right: 100px;
-    // margin-top: 100px;
     padding: 20px 40px;
+    // background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.7);
+    margin-right: 100px;
   }
 
   .account h2 {
