@@ -296,6 +296,16 @@
       }
     },
     {
+      icon: "magic-line",
+      title: "通用AI",
+      action: props.showTextInput,
+      params: {
+        url: "common-use",
+        prompt: "请您简要描述您的需求或问题，AI助手将会为您解答",
+        title: "通用AI",
+      }
+    },
+    {
       icon: "article-line",
       title: "撰写大创项目书",
       action: props.showTextInput,
@@ -303,6 +313,26 @@
         url: "project-document",
         prompt: "请您简要描述您的大创项目，AI助手将会为您生成一份详细的大创项目书",
         title: "撰写大创项目书",
+      }
+    },
+    {
+      icon: "file-user-line",
+      title: "撰写个人简历",
+      action: props.showTextInput,
+      params: {
+        url: "person-resume",
+        prompt: "请您简要描述您的个人简介、工作经验、教育背景等信息，AI助手将会为您生成一份详细的个人简历",
+        title: "撰写个人简历",
+      }
+    },
+    {
+      icon: "microscope-line",
+      title: "撰写实验报告",
+      action: props.showTextInput,
+      params: {
+        url: "test-report",
+        prompt: "请您简要描述您的实验内容和结果，AI助手将会为您生成一份详细的实验报告",
+        title: "撰写实验报告",
       }
     },
     {

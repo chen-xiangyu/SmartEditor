@@ -372,3 +372,38 @@ def autoTypography(request):
         response = utils.getAIResponse(request, prompt)
         return JsonResponse({"status": True, "answer": response.get_result()})
     return JsonResponse({"status": False, "error": "请求方法错误"})
+
+
+@csrf_exempt
+def personResume(request):
+    if request.method == "POST":
+        prompt = """
+            假设你是一个求职者，正在编写你的个人简历，下面就是你的个人简介、工作经验等信息，请你根据下面的内容，
+            写一份详细的个人简历，内容包括但不限于：个人信息，职业目标，教育背景，工作经验，技能，项目经验等，
+            可以对信息进行适当的扩展，注意排版（markdown格式），默认是中文简历，如果要求英文，则返回英文简历
+        """ + formatNote
+        response = utils.getAIResponse(request, prompt)
+        return JsonResponse({"status": True, "answer": response.get_result()})
+    return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def commonUse(request):
+    if request.method == "POST":
+        prompt = """
+            下面是用户的需求（或者问题等），请给出你的建议（或者解决方案等），
+        """ + formatNote
+        response = utils.getAIResponse(request, prompt)
+        return JsonResponse({"status": True, "answer": response.get_result()})
+    return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def testReport(request):
+    if request.method == "POST":
+        prompt = """
+            假设你是一个研究员，正在做一项实验，因此你需要写一份实验报告，下面就是你的实验内容和结果，
+            写一份详细的实验报告，内容包括但不限于：实验目的，实验环境，实验材料和方法，实验结果，分析，结论，参考文献等，
+            可以对信息进行适当的扩展，注意排版（markdown格式），默认是中文报告，如果要求英文，则返回英文报告
+        """ + formatNote
+        response = utils.getAIResponse(request, prompt)
+        return JsonResponse({"status": True, "answer": response.get_result()})
+    return JsonResponse({"status": False, "error": "请求方法错误"})

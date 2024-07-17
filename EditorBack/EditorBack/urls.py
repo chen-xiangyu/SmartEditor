@@ -49,5 +49,8 @@ urlpatterns = [
     path('make-pie/', views.makePie),
     path('make-line/', views.makeLine),
     path('make-scatter/', views.makeScatter),
+    path('person-resume/', views.personResume),
+    path('common-use/', views.commonUse),
+    path('test-report/', views.testReport),
 
 ]
