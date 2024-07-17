@@ -119,6 +119,9 @@
 
     <el-header>
       <el-menu mode="horizontal" :ellipsis="false">
+        <el-menu-item class="logo-item">
+          <img src="./logo.png" alt="Logo" class="logo" />
+        </el-menu-item>
         <div class="flex-grow" />
         <el-menu-item @click="gotoUserProfile()">
           个人中心
@@ -872,6 +875,16 @@
     &:hover {
       background-color: #d6d6d6;
     }
+  }
+
+  .logo_item{
+    display: flex;
+    align-items: center;
+    padding: 0 20px; /* 调整padding以获得适当的间距 */
+  }
+
+  .logo{
+    height: 50px; /* 调整logo的高度 */
   }
 
   .context-menu {
