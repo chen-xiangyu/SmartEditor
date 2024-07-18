@@ -46,8 +46,9 @@
     opacity: 0.75;
     border-radius: 0.5rem;
     padding: 0rem;
-    background: rgba(black, 0.1);
+    // background: rgba(black, 0.1);
     height: 100%;
+    overflow-y: auto; /* 添加滚动条 */
 
     &__list {
       list-style: none;
@@ -98,7 +99,27 @@
     margin-top: 10px;
     margin-bottom: 15px;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 2rem;
     font-family: 'KaiTi', sans-serif;
+  }
+
+  .outline::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .outline::-webkit-scrollbar-thumb {
+    background-color: #888; /* 滚动条的颜色 */
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box; /* 修正滚动条颜色的边距 */
+  }
+
+  .outline::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* 滚动条悬停时的颜色 */
+  }
+
+  .outline::-webkit-scrollbar-track {
+    background-color: #E4DCC8; /* 滚动条轨道的颜色 */
+    border-radius: 10px;
   }
 </style>

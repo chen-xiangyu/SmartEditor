@@ -1,39 +1,42 @@
 <template>
-  <el-menu mode="horizontal" :ellipsis="false">
-    <!-- <div class="flex-grow" /> -->
-    
-    <el-menu-item @click="gotoEditor()">
-      <svg class="remix">
-        <use :xlink:href="`${remixiconUrl}#ri-${'arrow-left-s-line'}`" />
-      </svg>
-      返回编辑器
-    </el-menu-item>
-  </el-menu>
-  <div class="account bg-light">
-    <h2>个人信息</h2>
-    <el-form ref="formRef" :model="formInfo" :rules="rules" label-width="auto">
-      <el-form-item label="账号" prop="account">
-        <el-input v-model="formInfo.account" autocomplete="off" disabled />
-      </el-form-item>
-      <el-form-item label="旧密码" prop="oldPassword" :error="oldPasswordError">
-        <el-input v-model="formInfo.oldPassword" type="password" autocomplete="off" />
-      </el-form-item>
-      <el-form-item label="新密码" prop="newPassword">
-        <el-input v-model="formInfo.newPassword" type="password" autocomplete="off" />
-      </el-form-item>
-      <el-form-item label="确认密码" prop="confirmPassword" class="input-button">
-        <el-input v-model="formInfo.confirmPassword" type="password" autocomplete="off" />
-        <el-button type="primary" @click="modifyPassword(formRef)">
-          修改密码
-        </el-button>
-      </el-form-item>
-      <el-form-item label="访问令牌" prop="AccessToken" class="input-button">
-        <el-input v-model="formInfo.AccessToken" autocomplete="off" />
-        <el-button type="primary" @click="setAccessToken()">
-          设置访问令牌
-        </el-button>
-      </el-form-item>
-    </el-form>
+  <div class="page-container">
+    <el-menu mode="horizontal" :ellipsis="false" style="background-color: #FCF5E4;" class="menu">
+      <!-- <div class="flex-grow" /> -->
+      <el-menu-item @click="gotoEditor()">
+        <svg class="remix">
+          <use :xlink:href="`${remixiconUrl}#ri-${'arrow-left-s-line'}`" />
+        </svg>
+        返回编辑器
+      </el-menu-item>
+    </el-menu>
+    <div class="account-container">
+      <div class="account bg-light">
+        <h2>个人信息</h2>
+        <el-form ref="formRef" :model="formInfo" :rules="rules" label-width="auto">
+          <el-form-item label="账号" prop="account">
+            <el-input v-model="formInfo.account" autocomplete="off" disabled />
+          </el-form-item>
+          <el-form-item label="旧密码" prop="oldPassword" :error="oldPasswordError">
+            <el-input v-model="formInfo.oldPassword" type="password" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="新密码" prop="newPassword">
+            <el-input v-model="formInfo.newPassword" type="password" autocomplete="off" />
+          </el-form-item>
+          <el-form-item label="确认密码" prop="confirmPassword" class="input-button">
+            <el-input v-model="formInfo.confirmPassword" type="password" autocomplete="off" />
+            <el-button type="primary" @click="modifyPassword(formRef)">
+              修改密码
+            </el-button>
+          </el-form-item>
+          <el-form-item label="访问令牌" prop="AccessToken" class="input-button">
+            <el-input v-model="formInfo.AccessToken" autocomplete="off" />
+            <el-button type="primary" @click="setAccessToken()">
+              设置访问令牌
+            </el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -103,12 +106,11 @@
 
     formEl.validate(async (valid) => {
       if (valid) {
-        let data = {
-          oldPassword: formInfo.oldPassword,
-          newPassword: formInfo.newPassword,
-        }
+        const formData = new FormData()
+        formData.append('oldPassword', formInfo.oldPassword)
+        formData.append('newPassword', formInfo.newPassword)
         console.log('submit!')
-        let res = await sendRequest(data, '/modify-password/')
+        let res = await sendRequest(formData, '/modify-password/')
         console.log("sign up", res)
         if (res.status) 
         {
@@ -130,13 +132,13 @@
   }
 
 
-  async function sendRequest(data: any, url: any) {
+  async function sendRequest(formData: any, url: any) {
 
     try {
-      console.log("开始发请求", data)
+      console.log("开始发请求", formData)
       const response = await axios.post(
         url,
-        JSON.stringify(data),
+        formData,
       )
       console.log('POST 请求成功：', response.data)
       return response.data
@@ -148,14 +150,12 @@
   async function setAccessToken(){
     try {
       console.log("on mounted")
-      let data = {
-        accessToken: formInfo.AccessToken,
-      }
+      const formData = new FormData()
+      formData.append('accessToken', formInfo.AccessToken)
       const response = await axios.post(
         '/set-access-token/',
-        JSON.stringify(data),
+        formData,
       )
-      // accountError.value = response.data.error
       let res = response.data
       if (res.status){
         ElMessage({
@@ -202,13 +202,21 @@
 </script>
 
 <style lang="scss" scoped>
+  .page-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #E9E3D3;
+  }
+  .account-container {
+    padding-top: 5%;
+  }
   .account {
-    width: 600px;
+    width: 40%;
     border: 1px solid #dddddd;
     border-radius: 30px;
     box-shadow: 10px 10px 20px #aaa;
-
-    margin: 100px auto;
+    background-color: rgba($color: #fff, $alpha: 0.6);
+    margin: 0 auto;
     padding: 20px 40px;
   }
 

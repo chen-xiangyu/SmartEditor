@@ -1,8 +1,8 @@
 <template>
-  <span class="title">{{ title }}</span>
-  <template v-for="item in items">
-    <MenuItem :item="item as MenuItemType"/>
-  </template>
+    <el-text class="title">{{ title }}</el-text>
+    <template v-for="item in items">
+      <MenuItem :item="item as MenuItemType"/>
+    </template>
 </template>
 
 <script setup lang="ts" name="MenuGroup">
@@ -16,12 +16,15 @@
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   .title {
-    height: 1.5rem;
-    line-height: 1.5rem;
-    font-family: "KaiTi", "楷体", "STKaiti", "楷体_GB2312", serif; /* 设置楷体字体 */;
-    font-size: 1.4rem;
-    /* font-weight: bolder; */
+    display: inline-block;
+    font-family: "KaiTi", "楷体", "STKaiti", "楷体_GB2312", serif;
+    height: 1.3rem;
+    padding: 0.15rem;
+    line-height: 1.3rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    font-weight: bolder;
   }
 </style>

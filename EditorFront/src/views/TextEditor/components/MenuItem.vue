@@ -34,10 +34,10 @@
     border-radius: 0.4rem;
     color: #333;
     cursor: pointer;
-    height: 1.75rem;
+    height: 1.6rem;
     padding: 0.25rem;
-    margin-right: 0.25rem;
-    width: 1.75rem;
+    margin-right: 0.2rem;
+    width: 1.6rem;
 
     svg {
       fill: currentColor;
@@ -50,4 +50,5 @@
       background-color: #d6d6d6;
     }
   }
+  
 </style>

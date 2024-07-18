@@ -2,6 +2,7 @@
   <el-container 
     style="height: 100vh; display: flex; flex-direction: column;" 
     ref="fileContRef" 
+    class="main-container"
     @mousedown="notSee($event)" 
   >
     <ul 
@@ -108,9 +109,9 @@
       </div>
     </el-dialog>
 
-    <el-header :class="{'expanded-menu' : isExpanded}">
-      <el-menu mode="horizontal" :ellipsis="false">
-        <el-menu-item class="logo-item">
+    <el-header :class="{'expanded-menu' : isExpanded}" style="padding: 0;">
+      <el-menu mode="horizontal" :ellipsis="false" style="background-color: #FCF5E4;">
+        <el-menu-item class="logo-item" style="background-color: inherit !important;">
           <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
         </el-menu-item>
         <div class="flex-grow" />
@@ -136,10 +137,10 @@
     </el-header>
 
     <el-container style="flex: 1;">
-      <el-aside width="20%" style="height: 100%;">
+      <el-aside width="20%" style="height: 100%; background-color: #E4DCC8;">
         <Outline/>
       </el-aside>
-      <el-main style="height: 100%;">
+      <el-main style="height: 100%; padding: 0; background-color: #FCF5E4;">
         <Menu 
           :editor="editor as Editor" 
           :showUploadDialog="showUploadDialog"
@@ -148,8 +149,8 @@
           :addImageByBase64="addImageByBase64"
           :autoTypography="autoTypography"
         />
-        <!-- <SelectionBubbleMenu ref="bubbleRef" :editor="editor as Editor" :showDataModal="showDataModal" /> -->
         <editor-content 
+          class="editor-content"
           :editor="editor"
           @scroll="hasScroll()"
           @mousedown="notSee($event)"
@@ -721,6 +722,15 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss" scoped>
+  .main-container {
+    overflow: auto;
+    scrollbar-width: none; /* 对Firefox有效 */
+  }
+
+  .main-container::-webkit-scrollbar {
+    display: none; /* 对Chrome, Safari和Edge有效 */
+  }
+
   .dialog-footer {
     display: flex;
     justify-content: flex-end;
@@ -872,6 +882,29 @@ b {
 .ProseMirror {
   overflow-y: scroll;
 }
+.ProseMirror{
+    max-height: 100%; /* 设置编辑区域的最大高度 */
+    overflow-y: auto /* 启用垂直滚动条 */
+  }
+
+  /* 自定义滚动条样式 */
+  .ProseMirror::-webkit-scrollbar {
+    width: 12px; /* 滚动条宽度 */
+  }
+
+  .ProseMirror::-webkit-scrollbar-track {
+    background: #faedd1; /* 滚动条轨道颜色 */
+  }
+
+  .ProseMirror::-webkit-scrollbar-thumb {
+    background-color: #E2DCCD; /* 滚动条滑块颜色 */
+    border-radius: 10px; /* 滑块圆角 */
+    border: 3px solid #FCF5E4; /* 滑块的边框颜色，使其看起来像内嵌在轨道中 */
+  }
+
+  .ProseMirror::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* 滑块悬停时的颜色 */
+  }
 .ProseMirror p {
   margin: 0;
 }

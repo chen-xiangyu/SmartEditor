@@ -6,9 +6,8 @@
           <MenuGroup :title="'文本处理:'" :items="textHandleItems"/>
         </el-col>
         <el-col :span="12">
-          <!-- <MenuGroup :title="'高亮标记:'" :items="highlightItems"/> -->
-          <MenuGroup :title="'层次排版:'" :items="headerItems"/>
-          <!-- <template v-for="item in templateItems">
+          <el-text class="title">AI助手：</el-text>
+          <template v-for="item in AIItems">
             <el-tooltip
               class="box-item"
               effect="dark"
@@ -18,20 +17,29 @@
             >
               <button 
                 class="menu-item"
-                @click="item.action(item.data)"
+                @click="item.action(item.params)"
                 >
                 <svg class="remix">
                   <use :xlink:href="`${remixiconUrl}#ri-${item.icon}`" />
                 </svg>
               </button>
             </el-tooltip>
-          </template> -->
+          </template>
+        </el-col>
+      </el-row>
+        
+      <el-row>
+        <el-col :span="12">
+          <MenuGroup :title="'常用功能:'" :items="commonFunctionItems"/>
+        </el-col>
+        <el-col :span="12">
+          <MenuGroup :title="'层次排版:'" :items="headerItems"/>
           <el-dropdown class="drop-down">
             <button
               class="menu-item"
             >
               <svg class="remix">
-                <use :xlink:href="`${remixiconUrl}#ri-${'file-list-fill'}`" />
+                <use :xlink:href="`${remixiconUrl}#ri-${'file-list-line'}`" />
               </svg>
             </button>
             <template #dropdown>
@@ -56,33 +64,6 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-        </el-col>
-      </el-row>
-        
-      <el-row>
-        <el-col :span="12">
-          <MenuGroup :title="'常用功能:'" :items="commonFunctionItems"/>
-        </el-col>
-        <el-col :span="12">
-          <span class="title">AI助手：</span>
-          <template v-for="item in AIItems">
-            <el-tooltip
-              class="box-item"
-              effect="dark"
-              :content="item.title"
-              placement="top"
-              hide-after="10"
-            >
-              <button 
-                class="menu-item"
-                @click="item.action(item.params)"
-                >
-                <svg class="remix">
-                  <use :xlink:href="`${remixiconUrl}#ri-${item.icon}`" />
-                </svg>
-              </button>
-            </el-tooltip>
-          </template>
         </el-col>
       </el-row>
       <input ref="imageFileInput" type="file" accept="image/jpeg, image/png, image/gif" style="display: none" @change="handleImageFile">
@@ -184,23 +165,13 @@
       icon: 'arrow-go-forward-line',
       title: '重做',
       action: () => props.editor?.chain().focus().redo().run()
+    },
+    {
+      icon: 'eraser-line',
+      title: '清空',
+      action: () => props.editor?.commands.clearContent(true)
     }
   ]
-
-  // const highlightItems = [
-  //   {
-  //     icon: 'mark-pen-line',
-  //     title: '高亮',
-  //     action: () => props.editor?.chain().focus().toggleHighlight().run(),
-  //     isActive: () => props.editor?.isActive('highlight')
-  //   },
-  //   // {
-  //   //   icon: 'external-link-line',
-  //   //   title: 'ExternalLink',
-  //   //   action: () => props.editor?.chain().focus().toggleCode().run(),
-  //   //   isActive: () => props.editor?.isActive('code')
-  //   // },
-  // ]
 
   const headerItems = [
     {
@@ -470,7 +441,7 @@
       }
     },
     {
-      icon: "pie-chart-2-fill",
+      icon: "pie-chart-line",
       title: "生成饼图",
       action: props.showTextInput,
       params: {
@@ -544,12 +515,19 @@
 </script>
 
 <style lang="scss" scoped>
+  .menu {
+    background-color: #E9E3D3;
+    border-bottom: 1px solid #E6E6E6;
+  }
   .title {
-    height: 1.5rem;
-    line-height: 1.5rem;
-    font-family: "KaiTi", "楷体", "STKaiti", "楷体_GB2312", serif; /* 设置楷体字体 */;
-    font-size: 1.4rem;
-    /* font-weight: bolder; */
+    display: inline-block;
+    font-family: "KaiTi", "楷体", "STKaiti", "楷体_GB2312", serif;
+    height: 1.3rem;
+    padding: 0.15rem;
+    line-height: 1.3rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+    font-weight: bolder;
   }
 
   .menu-item {
@@ -559,10 +537,10 @@
     border-radius: 0.4rem;
     color: #333;
     cursor: pointer;
-    height: 1.75rem;
-    padding: 0.25rem;
+    height: 1.6rem;
+    padding: 0.2rem;
     margin-right: 0.25rem;
-    width: 1.75rem;
+    width: 1.6rem;
 
     svg {
       fill: currentColor;
