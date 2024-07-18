@@ -20,7 +20,7 @@
 </template>
 
 <script setup lang="ts" name="SelectionBubbleMenu">
-  import { ref, computed } from 'vue'
+  import { ref } from 'vue'
   import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
   import { BubbleMenu, Editor } from '@tiptap/vue-3'
   import MenuGroup from './MenuGroup.vue'

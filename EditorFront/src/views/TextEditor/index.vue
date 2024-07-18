@@ -180,7 +180,7 @@
   import Placeholder from '@tiptap/extension-placeholder'
   import TaskItem from '@tiptap/extension-task-item'
   import TaskList from '@tiptap/extension-task-list'
-  import Blockquote from '@tiptap/extension-blockquote'
+  // import Blockquote from '@tiptap/extension-blockquote'
   import Image from '@tiptap/extension-image'
   import Youtube from '@tiptap/extension-youtube'
   import { Markdown } from 'tiptap-markdown'
@@ -192,8 +192,8 @@
   import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
   import { UploadFilled } from '@element-plus/icons-vue'
   import axios from "axios"
-  import { ElMessage, formContextKey } from 'element-plus'
-  import {RouterView,RouterLink,useRouter} from 'vue-router'
+  import { ElMessage } from 'element-plus'
+  import {useRouter} from 'vue-router'
 
   import Menu from "./components/Menu.vue"
   import Outline from "./components/Outline.vue"
@@ -201,10 +201,11 @@
   import EChart from './components/EChart.vue'
   import MindMap from "./components/MindMap.vue"
   import Loader from "./components/Loader.vue"
-  import MindElixir, { MindElixirInstance, Options, MindElixirData } from 'mind-elixir'
+  import { MindElixirData } from 'mind-elixir'
 
-  import { useEditorStore } from '@/store'
-  import { fa } from "element-plus/es/locales.mjs"
+  // import { useEditorStore } from '@/store'
+  import { useEditorStore } from '../../store'
+  // import { fa } from "element-plus/es/locales.mjs"
   // import { handlePaste } from "@tiptap/pm/tables"
 
   const router = useRouter()

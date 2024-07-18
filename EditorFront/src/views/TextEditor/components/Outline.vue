@@ -26,9 +26,10 @@
 
 
 <script setup lang="ts" name="Outline">
-  import { h, ref, type Component } from 'vue'
+  // import { h, ref, type Component } from 'vue'
 
-  import { useEditorStore } from '@/store'
+  // import { useEditorStore } from '@/store'
+  import { useEditorStore } from '../../../store'
   import { storeToRefs } from 'pinia'
 
   const editorStore = useEditorStore()

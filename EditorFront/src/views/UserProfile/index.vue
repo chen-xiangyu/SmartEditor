@@ -46,7 +46,7 @@
   import { ElMessage } from 'element-plus'
   import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
   import axios from 'axios'
-  import {RouterView,RouterLink,useRouter} from 'vue-router'
+  import {useRouter} from 'vue-router'
 
   const router = useRouter()
 
@@ -61,14 +61,14 @@
 
   let oldPasswordError = ref('')
 
-  const validateOldPassword = (rule: any, value: any, callback: any) => {
+  const validateOldPassword = (_rule: any, value: any, callback: any) => {
     if (value === '') {
       // callback(new Error('请输入新密码'))
     } else {
       callback()
     }
   }
-  const validateNewPassword = (rule: any, value: any, callback: any) => {
+  const validateNewPassword = (_rule: any, value: any, callback: any) => {
     if (value === '') {
       // callback(new Error('请输入新密码'))
     } else if (value === formInfo.oldPassword) {
@@ -77,7 +77,7 @@
       callback()
     }
   }
-  const validateConfirmPassword = (rule: any, value: any, callback: any) => {
+  const validateConfirmPassword = (_rule: any, value: any, callback: any) => {
     if (value === '') {
       // callback(new Error('请输入确认密码'))
     } else if (value !== formInfo.newPassword) {
@@ -92,12 +92,12 @@
     confirmPassword: [{ validator: validateConfirmPassword, trigger: 'change' }],
   })
 
-  function clearInput()
-  {
-    formInfo.oldPassword = ''
-    formInfo.newPassword = ''
-    formInfo.confirmPassword = ''
-  }
+  // function clearInput()
+  // {
+  //   formInfo.oldPassword = ''
+  //   formInfo.newPassword = ''
+  //   formInfo.confirmPassword = ''
+  // }
 
   async function modifyPassword(formEl: FormInstance | undefined){
     if (!formEl) return

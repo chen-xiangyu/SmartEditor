@@ -12,7 +12,7 @@ const router = createRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: (to) => {
+			redirect: (_to) => {
 				return isLoggedIn() ? '/editor' : '/login'
 			}
 		},

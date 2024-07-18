@@ -38,7 +38,7 @@
   import { reactive, ref } from 'vue'
   import type { FormInstance, FormRules } from 'element-plus'
   import axios from 'axios'
-  import {RouterView,RouterLink,useRouter} from 'vue-router'
+  import {useRouter} from 'vue-router'
 
   const router = useRouter()
   let isSignUp = ref(false)
@@ -52,21 +52,21 @@
   let accountError = ref('')
   let passwordError = ref('')
 
-  const validateAccount = (rule: any, value: any, callback: any) => {
+  const validateAccount = (_rule: any, value: any, callback: any) => {
     if (value === '') {
       callback(new Error('请输入账号'))
     } else {
       callback()
     }
   }
-  const validatePassword = (rule: any, value: any, callback: any) => {
+  const validatePassword = (_rule: any, value: any, callback: any) => {
     if (value === '') {
       callback(new Error('请输入密码'))
     } else {
       callback()
     }
   }
-  const validateConfirmPassword = (rule: any, value: any, callback: any) => {
+  const validateConfirmPassword = (_rule: any, value: any, callback: any) => {
     if (value === '') {
       callback(new Error('请输入确认密码'))
     } else if (value !== formInfo.password) {

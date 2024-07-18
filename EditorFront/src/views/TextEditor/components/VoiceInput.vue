@@ -32,14 +32,14 @@
   const recwave = ref(null)
   let rec = null
   let wave = null
-  let recBlob = null
+  // let recBlob = null
 
   const recOpen = () => {
     rec = Recorder({
       type: 'wav',
       sampleRate: 16000,
       bitRate: 16,
-      onProcess: (buffers, powerLevel, bufferDuration, bufferSampleRate, newBufferIdx, asyncEnd) => {
+      onProcess: (buffers, powerLevel, _bufferDuration, bufferSampleRate, _newBufferIdx, _asyncEnd) => {
         if (wave) wave.input(buffers[buffers.length - 1], powerLevel, bufferSampleRate)
       },
     })
@@ -83,7 +83,7 @@
     }
     rec.stop(
       (blob, duration) => {
-        recBlob = blob
+        // recBlob = blob
         const localUrl = (window.URL || webkitURL).createObjectURL(blob)
         console.log('录音成功', blob, localUrl, '时长:' + duration + 'ms')
         ElMessage({

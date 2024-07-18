@@ -1,5 +1,5 @@
 import { defineStore} from 'pinia'
-import { h, ref, type Component } from 'vue'
+import { ref } from 'vue'
 
 export const useEditorStore = defineStore('editor', () => {
   const headings = ref()
