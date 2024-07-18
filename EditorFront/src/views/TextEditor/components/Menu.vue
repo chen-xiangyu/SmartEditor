@@ -164,8 +164,8 @@
     {
       icon: 'mark-pen-line',
       title: '高亮',
-      action: () => props.editor?.chain().focus().toggleHighlight().run(),
-      isActive: () => props.editor?.isActive('highlight')
+      action: () => props.editor?.chain().focus().toggleHighlight({ color: '#b197fc' }).run(),
+      isActive: () => props.editor?.isActive('highlight', { color: '#b197fc' })
     },
     {
       icon: 'arrow-go-back-line',

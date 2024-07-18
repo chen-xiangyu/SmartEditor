@@ -202,12 +202,37 @@
   import MindMap from "./components/MindMap.vue"
   import Loader from "./components/Loader.vue"
   import { MindElixirData } from 'mind-elixir'
+  import Strike from "@tiptap/extension-strike";
+  import { markPasteRule } from "@tiptap/core";
+  import { nodePasteRule } from '@tiptap/core';
+  const pasteRegex = /(?:^|\s)((?:~)((?:[^~]+))(?:~))/g
+  import Heading from '@tiptap/extension-heading'
+// 自定义的删除线扩展，继承自 Strike，并添加粘贴规则
+const CustomStrike = Strike.extend({
+  addPasteRules() {
+    return [
+      markPasteRule({
+        find: pasteRegex,
+        type: this.type,
+      })
+    ];
+  },
+});
+const CustomHeading = Heading.extend({
+  addPasteRules() {
+    return [
+      nodePasteRule({
+        find:  /^(#)\s+(.+)/gm,
+        type: this.type,
+      })
+    ];
+  },
+});
 
   // import { useEditorStore } from '@/store'
   import { useEditorStore } from '../../store'
   // import { fa } from "element-plus/es/locales.mjs"
   // import { handlePaste } from "@tiptap/pm/tables"
-
   const router = useRouter()
   const editorStore = useEditorStore()
   // 编辑器
@@ -216,7 +241,9 @@
     content: ``,
     extensions: [
       StarterKit,
-      Highlight,
+      Highlight.configure({
+        multicolor: true,
+      }),
       Subscript,
       Superscript,
       Underline,
@@ -245,6 +272,8 @@
       TableRow,
       TableHeader,
       TableCell,
+      // CustomStrike,
+      // CustomHeading,
     ],
     onUpdate({ editor }) {
       loadHeadings()
@@ -255,6 +284,8 @@
       editorStore.setEditorInstance(editor)
     },
   });
+
+
   // 监听粘贴事件
   const handlePaste = (event: ClipboardEvent) => {
     event.preventDefault()
@@ -265,7 +296,6 @@
     // editor.value?.commands.insertContent(pastedData)
     editor.value?.commands.setContent(`${selectionStr.from}\n\n${pastedData}\n\n${selectionStr.to}`, true)
   }
-
   // 润色功能
   const AIList = reactive({
     'translate': {name: "翻译", icon: "translate"},
@@ -803,9 +833,9 @@ onUnmounted(() => {
   }
 
   .context-menu {
-    width: 240px; /* 调整宽度以适应两列布局 */
+    width: 220px; /* 调整宽度以适应两列布局 */
     margin: 0;
-    background: #fff;
+    background: #EAEAEB;
     z-index: 3000;
     position: absolute;
     list-style-type: none;
@@ -821,11 +851,11 @@ onUnmounted(() => {
   }
 
   .context-menu .item {
-    height: 40px; /* 增加高度 */
+    height: 35px; /* 增加高度 */
     display: flex; /* 使用弹性布局 */
     align-items: center; /* 垂直居中 */
     padding: 0 10px; /* 增加内边距 */
-    color: rgb(29, 33, 41);
+    color: #D9D9D9;
     cursor: pointer;
     border-radius: 4px; /* 增加圆角 */
     background-color: #f9f9f9; /* 添加背景色 */
@@ -835,16 +865,18 @@ onUnmounted(() => {
   .context-menu .item-text {
     flex: 1; /* 占据剩余空间，使文本左对齐 */
     text-align: left; /* 确保文本左对齐 */
+    font-size: 0.9rem;
+    color: #333;
   }
 
   .context-menu .item:hover {
-    background: rgb(229, 230, 235);
+    background: rgb(205, 206, 210);
   }
 
   .remix {
-    fill: currentColor;
-    width: 1.5rem;
-    height: 1.5rem;
+    fill: #333;
+    width: 1.1rem;
+    height: 1.1rem;
     margin-right: 5px; /* 增加与文本的间距 */
   }
 </style>
@@ -927,6 +959,13 @@ b {
     padding: 0 2rem;
     list-style: square;
   }
+  code {
+    background-color: #EAEAEB;
+    border-radius: 0.4rem;
+    color: #9AC47C;
+    font-size: 0.85rem;
+    padding: 0.25em 0.3em;
+  }
   ol {
     padding: 0 2rem;
     list-style: decimal;
@@ -985,14 +1024,15 @@ b {
     }
   }
   pre {
-    background: #0d0d0d;
+    background: #EAEAEB;
     color: #fff;
     font-family: 'JetBrainsMono', monospace;
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
 
     code {
-      color: inherit;
+      color: #77A0BE;
+      // background-color: #FCF5E4;
       padding: 0;
       background: none;
       font-size: 0.8rem;
