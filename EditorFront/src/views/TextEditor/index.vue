@@ -484,6 +484,7 @@ const visibleCard = ref(false)
   const isMultiMedia = ref(false)
   const showUploadDialog = (params: any) => {
     visibleUploadDialog.value = true
+    console.log("come", params)
     uploadUrl.value = params.url
   }
   const beforeUpload = async (file: any) => {

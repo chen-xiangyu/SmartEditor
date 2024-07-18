@@ -371,7 +371,7 @@
       icon: "character-recognition-line",
       title: "OCR识别",
       action: props.showUploadDialog,
-      parmas: {
+      params: {
         url: "ocr",
       }
     },
