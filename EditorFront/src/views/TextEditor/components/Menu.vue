@@ -9,7 +9,6 @@
           <el-text class="title">AI助手：</el-text>
           <template v-for="item in AIItems">
             <el-tooltip
-              class="box-item"
               effect="dark"
               :content="item.title"
               placement="top"
@@ -35,13 +34,21 @@
         <el-col :span="12">
           <MenuGroup :title="'层次排版:'" :items="headerItems"/>
           <el-dropdown class="drop-down">
-            <button
-              class="menu-item"
-            >
-              <svg class="remix">
-                <use :xlink:href="`${remixiconUrl}#ri-${'file-list-line'}`" />
-              </svg>
-            </button>
+              <button
+                class="menu-item"
+              >
+                <el-tooltip
+                  effect="dark"
+                  :content="'文档模版'"
+                  placement="top"
+                  hide-after="10"
+                >
+                  <svg class="remix">
+                    <use :xlink:href="`${remixiconUrl}#ri-${'file-list-line'}`" />
+                  </svg>
+                </el-tooltip>
+              </button>
+
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item 
@@ -53,7 +60,11 @@
                     placement="left"
                     width="200"
                     trigger="hover"
-                    :popper-style="{ boxShadow: 'rgb(14 18 22 / 35%) 0px 10px 38px -10px, rgb(14 18 22 / 20%) 0px 10px 20px -15px', padding: '10px' }"
+                    hide-after="10"
+                    :popper-style="{ 
+                      boxShadow: 'rgb(14 18 22 / 35%) 0px 10px 38px -10px, rgb(14 18 22 / 20%) 0px 10px 20px -15px', 
+                      padding: '10px' 
+                    }"
                   >
                     <template #reference>
                       <span class="dropdown-text">{{ item.params?.title }}</span>
@@ -571,7 +582,7 @@
 
   .dropdown-text {
     font-family: "KaiTi", "楷体", "STKaiti", "楷体_GB2312", serif; /* 设置楷体字体 */;
-    font-size: 21px;
+    font-size: 1.1rem;
     color: #333;
     transition: color 0.3s ease;
     margin: 8px 5px;
@@ -581,8 +592,8 @@
     color: #007bff; /* Change to your preferred hover color */
   }
   .popover-image {
-    width: 150px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 </style>

@@ -4,7 +4,6 @@ import App from './App.vue'
 import router from './router/index'
 import { createPinia } from 'pinia'
 import axios from 'axios'
-// import "./assets/reset.css"
 
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
