@@ -255,7 +255,7 @@ def makeBar(request):
         #     不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块（json格式，其中不要加任何注释 // ）中，
         # """
         prompt = """
-            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
+            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
             图表的类型为柱状图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
             json 文件的格式，
         """
@@ -270,7 +270,7 @@ def makeBar(request):
 def makePie(request):
     if request.method == "POST":
         prompt = """
-            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
+            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
             图表的类型为饼图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
             json 文件的格式，
         """
@@ -282,9 +282,9 @@ def makePie(request):
 def makeLine(request):
     if request.method == "POST":
         prompt = """
-            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
+            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
             图表的类型为折线图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
-            json 文件的格式，
+            请注意json 文件的格式，不要写错，
         """
         response = utils.getAIResponse(request, prompt)
         return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
@@ -294,21 +294,25 @@ def makeLine(request):
 def makeScatter(request):
     if request.method == "POST":
         prompt = """
-            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
+            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
             图表的类型为散点图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
-            json 文件的格式（不要在json对象中写注释），数据结构类似这样，
-            {
-              xAxis: {
-                data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-              },
+            请注意json文件的格式，不要写错，不要在json对象中写注释，数据结构类似这样，
+            option = {
+              xAxis: {},
               yAxis: {},
               series: [
                 {
-                  type: 'scatter',
-                  data: [220, 182, 191, 234, 290, 330, 310]
+                  symbolSize: 20,
+                  data: [
+                    [10.0, 8.04],
+                    [8.07, 6.95],
+                    [13.0, 7.58],
+                    [9.05, 8.81]
+                  ],
+                  type: 'scatter'
                 }
               ]
-            }
+            };
         """
         response = utils.getAIResponse(request, prompt)
         return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
