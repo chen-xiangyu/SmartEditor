@@ -25,7 +25,10 @@
   import axios from "axios"
   import { ElMessage } from 'element-plus'
 
-  const props = defineProps<{ getVoiceResult: Function }>()
+  const props = defineProps<{ 
+    getVoiceResult: Function;
+    showLoader: Function;
+  }>()
   const recwave = ref(null)
   let rec = null
   let wave = null
@@ -105,6 +108,7 @@
       console.log("on mounted")
       const formData = new FormData()
       formData.append('file', blob, 'voice.wav')
+      props.showLoader()
       const response = await axios.post(
         `/voice-recognise/`,
         formData,

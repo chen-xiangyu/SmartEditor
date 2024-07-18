@@ -88,7 +88,11 @@
       width="50%"
       @close="visibleVoiceInput = false"
     >
-      <VoiceInput :getVoiceResult="getVoiceResult"></VoiceInput>
+      <VoiceInput 
+        :getVoiceResult="getVoiceResult" 
+        :showLoader="showLoader"
+      >
+      </VoiceInput>
     </el-dialog>
 
     <el-dialog
@@ -108,6 +112,8 @@
         <el-button type="primary" @mousedown="getAIResponse">开始生成</el-button>
       </div>
     </el-dialog>
+
+    <Loader v-if="visibleLoader"/>
 
     <el-header :class="{'expanded-menu' : isExpanded}" style="padding: 0;">
       <el-menu mode="horizontal" :ellipsis="false" style="background-color: #FCF5E4;">
@@ -185,17 +191,16 @@
 
   import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
   import { UploadFilled } from '@element-plus/icons-vue'
-  import MenuGroup from './components/MenuGroup.vue'
   import axios from "axios"
   import { ElMessage, formContextKey } from 'element-plus'
   import {RouterView,RouterLink,useRouter} from 'vue-router'
 
   import Menu from "./components/Menu.vue"
   import Outline from "./components/Outline.vue"
-  import SelectionBubbleMenu from "./components/SelectionBubbleMenu.vue"
   import VoiceInput from "./components/VoiceInput.vue"
   import EChart from './components/EChart.vue'
   import MindMap from "./components/MindMap.vue"
+  import Loader from "./components/Loader.vue"
   import MindElixir, { MindElixirInstance, Options, MindElixirData } from 'mind-elixir'
 
   import { useEditorStore } from '@/store'
@@ -239,25 +244,10 @@
       TableRow,
       TableHeader,
       TableCell,
-
-      // Blockquote.configure({
-      //   HTMLAttributes: {
-      //     class: "my-blockquote",
-      //   },
-      // })
     ],
     onUpdate({ editor }) {
       loadHeadings()
       editorStore.setEditorInstance(editor)
-      // const selectionTmp = editor.state.selection
-      // if (selectionTmp) {
-      //   const { from, to} = selectionTmp
-      //   oldContent = newContent
-      //   newContent= editor.getText() || ''
-      //   selectionStr.from = oldContent.slice(0, from - 1)
-      //   selectionStr.to = oldContent.slice(to - 1)
-      //   console.log("update", selectionStr.from, selectionStr.to)
-      // }
     },
     onCreate({ editor }) {
       loadHeadings()
@@ -291,9 +281,7 @@
       console.log("on mounted")
       const formData = new FormData()
       formData.append('question', selectionMsg)
-      // let data = {
-      //   question: selectionMsg
-      // }
+      showLoader()
       const response = await axios.post(
         `/${name}/`,
         formData,
@@ -301,10 +289,11 @@
       // accountError.value = response.data.error
       let res = response.data
       if (res.status){
-        console.log(res.answer)
+        // console.log(res.answer)
         cardMsg.value = res.answer
         isMultiMedia.value = false
         visibleCard.value = true
+        closeLoader()
       } else{
         console.log(res.error)
       }
@@ -318,7 +307,7 @@
 
   const fileContRef = ref(null)
   const visibleMenu = ref(false)
-const visibleCard = ref(false)
+  const visibleCard = ref(false)
   const username = ref(localStorage.getItem('account'))
   const cardRef = ref()
   const menuRef = ref()
@@ -331,8 +320,6 @@ const visibleCard = ref(false)
   var selectionMsg: any
   var selection: any
   var selectionStr = {from: "", to: ""}
-  var oldContent = ""
-  var newContent = ""
   // 获取选中的文字
   const selectText = (e: MouseEvent) => {
     const selectionTmp = editor.value?.state.selection
@@ -484,7 +471,6 @@ const visibleCard = ref(false)
   const isMultiMedia = ref(false)
   const showUploadDialog = (params: any) => {
     visibleUploadDialog.value = true
-    console.log("come", params)
     uploadUrl.value = params.url
   }
   const beforeUpload = async (file: any) => {
@@ -498,6 +484,7 @@ const visibleCard = ref(false)
       console.log("on mounted")
       const formData = new FormData()
       formData.append('file', file)
+      showLoader()
       const response = await axios.post(
         `/${uploadUrl.value}/`,
         formData,
@@ -509,6 +496,7 @@ const visibleCard = ref(false)
         cardMsg.value = res.answer
         isMultiMedia.value = true
         visibleCard.value = true
+        closeLoader()
       } else{
         console.log(res.error)
       }
@@ -529,6 +517,7 @@ const visibleCard = ref(false)
     cardMsg.value = param
     isMultiMedia.value = true
     visibleCard.value = true
+    closeLoader()
   }
 
   const cardStyle = computed(() => {
@@ -584,6 +573,7 @@ const visibleCard = ref(false)
       console.log("on mounted")
       const formData = new FormData()
       formData.append('question', textInput.value)
+      showLoader()
       const response = await axios.post(
         `/${uploadUrl.value}/`,
         formData,
@@ -601,6 +591,7 @@ const visibleCard = ref(false)
         } else {
           handleAIDocument(res.answer)
         }
+        closeLoader()
 
       } else{
         console.log(res.error)
@@ -652,14 +643,6 @@ const visibleCard = ref(false)
   const visibleMindMap = ref(false)
   const mindMapRef = ref()
   const mindMapData = ref<MindElixirData | null>(null)
-  // const setMindMapImage = () => {
-  //   editor.value?.commands.setImage({
-  //     src: mindMapRef.value?.exportAsBase64('png'),
-  //     alt: "思维导图",
-  //     title: "思维导图",
-  //   })
-  //   visibleMindMap.value = false
-  // }
   const setMindMapImage = async () => {
   try {
     const base64Image = await mindMapRef.value?.exportAsBase64('png');
@@ -691,6 +674,7 @@ const visibleCard = ref(false)
       console.log("on mounted")
       const formData = new FormData()
       formData.append('question', editor.value?.getText() as string)
+      showLoader()
       const response = await axios.post(
         `/${params.url}/`,
         formData,
@@ -699,7 +683,7 @@ const visibleCard = ref(false)
       console.log(res.answer)
       if (res.status){
         editor.value?.commands.setContent(res.answer)
-
+        closeLoader()
       } else{
         console.log(res.error)
       }
@@ -720,12 +704,24 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
 });
+
+  const visibleLoader = ref(false)
+  const showLoader = () => {
+    visibleLoader.value = true
+    visibleUploadDialog.value = false
+    visibleTextInput.value = false
+    visibleVoiceInput.value = false
+  }
+  const closeLoader = () => {
+    visibleLoader.value = false
+  }
+
 </script>
 
 <style lang="scss" scoped>
   .main-container {
-    overflow: auto;
-    scrollbar-width: none; /* 对Firefox有效 */
+    overflow-y: scroll;
+    scrollbar-width: none; 
   }
 
   .main-container::-webkit-scrollbar {
@@ -791,8 +787,9 @@ onUnmounted(() => {
   .expanded-menu {
     width: 100vw; /* 100% viewport width */
     position: fixed; /* 固定在页面顶部 */
-    top: 0;
-    left: 0;
+    // position: sticky;
+    top: 0px;
+    left: 0px;
     z-index: 1000; /* 确保位于其他内容之上 */
   }
 
