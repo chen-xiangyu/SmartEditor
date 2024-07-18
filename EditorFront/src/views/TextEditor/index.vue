@@ -684,6 +684,7 @@ const CustomHeading = Heading.extend({
         title: "思维导图",
       });
       visibleMindMap.value = false;
+      visibleCard.value = false;
     } else {
       console.error('Failed to export mind map as base64.');
     }

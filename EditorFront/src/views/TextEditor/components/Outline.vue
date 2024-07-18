@@ -87,6 +87,10 @@
       &--5 {
         padding-left: 4.5rem;
       }
+
+      &--6 {
+        padding-left: 5rem;
+      }
     }
 
     .outline__button {
