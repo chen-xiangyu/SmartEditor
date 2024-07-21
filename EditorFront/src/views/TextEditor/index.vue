@@ -202,32 +202,6 @@
   import MindMap from "./components/MindMap.vue"
   import Loader from "./components/Loader.vue"
   import { MindElixirData } from 'mind-elixir'
-  import Strike from "@tiptap/extension-strike";
-  import { markPasteRule } from "@tiptap/core";
-  import { nodePasteRule } from '@tiptap/core';
-  const pasteRegex = /(?:^|\s)((?:~)((?:[^~]+))(?:~))/g
-  import Heading from '@tiptap/extension-heading'
-// 自定义的删除线扩展，继承自 Strike，并添加粘贴规则
-const CustomStrike = Strike.extend({
-  addPasteRules() {
-    return [
-      markPasteRule({
-        find: pasteRegex,
-        type: this.type,
-      })
-    ];
-  },
-});
-const CustomHeading = Heading.extend({
-  addPasteRules() {
-    return [
-      nodePasteRule({
-        find:  /^(#)\s+(.+)/gm,
-        type: this.type,
-      })
-    ];
-  },
-});
 
   // import { useEditorStore } from '@/store'
   import { useEditorStore } from '../../store'
@@ -272,8 +246,6 @@ const CustomHeading = Heading.extend({
       TableRow,
       TableHeader,
       TableCell,
-      // CustomStrike,
-      // CustomHeading,
     ],
     onUpdate({ editor }) {
       loadHeadings()
@@ -294,7 +266,12 @@ const CustomHeading = Heading.extend({
     const clipboardData: DataTransfer | null = event.clipboardData
     const pastedData: string = clipboardData ? clipboardData.getData('text') : ''
     // editor.value?.commands.insertContent(pastedData)
-    editor.value?.commands.setContent(`${selectionStr.from}\n\n${pastedData}\n\n${selectionStr.to}`, true)
+    // editor.value?.commands.insertContent("hello")
+    let { from, to } = editor.value?.state.selection || { from: 0, to: 0 };
+    console.log(from, "@@@", to, "@@@", pastedData.length)
+    from = Math.max(to - pastedData.length - 1, 0)
+    editor.value?.chain().focus().deleteRange({ from, to }).insertContent(pastedData).run()
+    // editor.value?.commands.setContent(`${selectionStr.from}\n\n${pastedData}\n\n${selectionStr.to}`, true)
   }
   // 润色功能
   const AIList = reactive({
