@@ -145,8 +145,9 @@ def getJson(text):
     pattern = r'`{3}(.*?)`{3}'
     match = re.search(pattern, text, re.DOTALL)
     if match:
-        # 提取匹配结果中的内容
-        return match.group(1)[4:]
+        # 提取匹配结果中的内容，去除注释
+        result = re.sub(r'//.*$', '', match.group(1)[4:], flags=re.MULTILINE)
+        return result
     else:
         return ""
 
