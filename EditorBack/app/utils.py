@@ -119,9 +119,12 @@ def getAIResponse(request, prompt):
     account = request.META.get('HTTP_ACCOUNT')
     question = request.POST.get("question")
     user = User.objects.get(account=account)
+    access_token = user.accessToken
+    if access_token == None:
+        access_token = "b3d27cfee042938a09a088dfd302180c3467118f"
+    # print(access_token)
     erniebot.api_type = 'aistudio'
-    erniebot.access_token = user.accessToken
-
+    erniebot.access_token =access_token
     response = erniebot.ChatCompletion.create(
         model='ernie-bot',
         messages=[{'role': 'user', 'content': prompt + question}],
