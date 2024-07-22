@@ -116,7 +116,7 @@
 
     <Loader v-if="visibleLoader"/>
 
-    <el-header :class="{'expanded-menu' : isExpanded}" style="padding: 0;">
+    <el-header class="header-inner" style="padding: 0;">
       <el-menu mode="horizontal" :ellipsis="false" style="background-color: #FCF5E4;">
         <el-menu-item class="logo-item" style="background-color: inherit !important;">
           <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
@@ -148,14 +148,18 @@
         <Outline/>
       </el-aside>
       <el-main style="height: 100%; padding: 0; background-color: #FCF5E4;">
-        <Menu 
+        <div class="menu-outer">
+          <Menu 
+          class="menu-inner"
           :editor="editor as Editor" 
           :showUploadDialog="showUploadDialog"
           :showVoiceInput="showVoiceInput"
           :showTextInput="showTextInput"
           :addImageByBase64="addImageByBase64"
           :autoTypography="autoTypography"
-        />
+          />
+        </div>
+
         <editor-content 
           class="editor-content"
           :editor="editor"
@@ -709,17 +713,6 @@ import { colCount } from "@tiptap/pm/tables"
     }
   }
 
-const isExpanded = ref(false);
-const handleScroll = () => {
-  isExpanded.value = window.scrollY > 0;
-};
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-});
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-});
-
   const visibleLoader = ref(false)
   const showLoader = () => {
     visibleLoader.value = true
@@ -799,13 +792,25 @@ onUnmounted(() => {
     height: 50px; /* 调整logo的高度 */
   }
 
-  .expanded-menu {
+  .header-inner {
     width: 100vw; /* 100% viewport width */
-    position: fixed; /* 固定在页面顶部 */
+    position: sticky; /* 固定在页面顶部 */
     // position: sticky;
     top: 0px;
     left: 0px;
     z-index: 1000; /* 确保位于其他内容之上 */
+  }
+
+  .menu-outer {
+    height: 4rem;
+    width: 80%;
+    margin-bottom: 5px;
+  }
+  .menu-inner {
+    position: fixed;
+    top: 60px;
+    width: 80%;
+    z-index: 1000;
   }
 
   .el-dropdown-link {
