@@ -28,6 +28,7 @@
   const props = defineProps<{ 
     getVoiceResult: Function;
     showLoader: Function;
+    closeLoader: Function;
   }>()
   const recwave = ref(null)
   let rec = null
@@ -122,8 +123,10 @@
         // visibleCard.value = true
         props.getVoiceResult(res.answer)
       } else{
+        ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)
       }
+      props.closeLoader()
       console.log('POST 请求成功：', response.data)
     } catch (error) {
       console.error('POST 请求失败：', error)

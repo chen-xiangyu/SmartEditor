@@ -91,6 +91,7 @@
       <VoiceInput 
         :getVoiceResult="getVoiceResult" 
         :showLoader="showLoader"
+        :closeLoader="closeLoader"
       >
       </VoiceInput>
     </el-dialog>
@@ -205,6 +206,7 @@
 
   // import { useEditorStore } from '@/store'
   import { useEditorStore } from '../../store'
+import { colCount } from "@tiptap/pm/tables"
   // import { fa } from "element-plus/es/locales.mjs"
   // import { handlePaste } from "@tiptap/pm/tables"
   const router = useRouter()
@@ -268,7 +270,7 @@
     // editor.value?.commands.insertContent(pastedData)
     // editor.value?.commands.insertContent("hello")
     let { from, to } = editor.value?.state.selection || { from: 0, to: 0 };
-    console.log(from, "@@@", to, "@@@", pastedData.length)
+    // console.log(from, "@@@", to, "@@@", pastedData.length)
     from = Math.max(to - pastedData.length - 1, 0)
     editor.value?.chain().focus().deleteRange({ from, to }).insertContent(pastedData).run()
     // editor.value?.commands.setContent(`${selectionStr.from}\n\n${pastedData}\n\n${selectionStr.to}`, true)
@@ -301,10 +303,11 @@
         cardMsg.value = res.answer
         isMultiMedia.value = false
         visibleCard.value = true
-        closeLoader()
       } else{
+        ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)
       }
+      closeLoader()
       console.log('POST 请求成功：', response.data)
       
     } catch (error) {
@@ -504,10 +507,11 @@
         cardMsg.value = res.answer
         isMultiMedia.value = true
         visibleCard.value = true
-        closeLoader()
       } else{
+        ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)
       }
+      closeLoader()
       console.log('POST 请求成功：', response.data)
     } catch (error) {
       console.error('POST 请求失败：', error)
@@ -599,11 +603,11 @@
         } else {
           handleAIDocument(res.answer)
         }
-        closeLoader()
-
       } else{
+        ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)
       }
+      closeLoader()
       console.log('POST 请求成功：', response.data)
       
     } catch (error) {
@@ -692,10 +696,12 @@
       console.log(res.answer)
       if (res.status){
         editor.value?.commands.setContent(res.answer)
-        closeLoader()
+        loadHeadings()
       } else{
+        ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)
       }
+      closeLoader()
       console.log('POST 请求成功：', response.data)
       
     } catch (error) {

@@ -127,274 +127,318 @@ def modifyPassword(request):
 
 @csrf_exempt
 def translate(request):
-    if request.method == "POST":
-        prompt = '''
-            请帮我翻译以下内容，在翻译之前，想先判断一下这个内容是不是中文，
-            如果是中文，则翻译问英文，如果是其他语言，则需要翻译为中文，注意，
-            你只需要返回翻译的结果，不需要对此进行任何解释，不需要除了翻译结果以外的其他任何内容：
-        '''
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-        # return JsonResponse({"status": True, "answer": "AI的答案"})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = '''
+                请帮我翻译以下内容，在翻译之前，想先判断一下这个内容是不是中文，
+                如果是中文，则翻译问英文，如果是其他语言，则需要翻译为中文，注意，
+                你只需要返回翻译的结果，不需要对此进行任何解释，不需要除了翻译结果以外的其他任何内容：
+            '''
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+            # return JsonResponse({"status": True, "answer": "AI的答案"})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 
 @csrf_exempt
 def abstract(request):
-    if request.method == "POST":
-        prompt = "请帮我总结以下内容(就是做摘要)，并直接返回总结的结果，" + languageNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = "请帮我总结以下内容(就是做摘要)，并直接返回总结的结果，" + languageNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def decorate(request):
-    if request.method == "POST":
-        prompt = "请帮我修饰以下内容，并直接返回修饰后的结果，" + languageNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = "请帮我修饰以下内容，并直接返回修饰后的结果，" + languageNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def continueWrite(request):
-    if request.method == "POST":
-        prompt = "请帮我续写以上内容，发挥你的想象力，添加更多细节，并直接返回续写的结果，" + languageNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = "请帮我续写以上内容，发挥你的想象力，添加更多细节，并直接返回续写的结果，" + languageNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def rewrite(request):
-    if request.method == "POST":
-        prompt = "请帮我检查下面这段话的语法和内容，修改其中的病句（或者不合适的地方），并直接返回改正后的结果，" + languageNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = "请帮我检查下面这段话的语法和内容，修改其中的病句（或者不合适的地方），并直接返回改正后的结果，" + languageNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def improveWrite(request):
-    if request.method == "POST":
-        prompt = "请帮我改进以下内容，对其进行优化，并直接返回改进后的结果，" + languageNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = "请帮我改进以下内容，对其进行优化，并直接返回改进后的结果，" + languageNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def summarize(request):
-    if request.method == "POST":
-        prompt = "请帮我总结以下内容，并直接返回总结的结果" + languageNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = "请帮我总结以下内容，并直接返回总结的结果" + languageNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+     return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def analysis(request):
-    if request.method == "POST":
-        prompt = "请帮我分析以下内容（依照内容选择一个最合适的角度进行分析即可），并直接返回分析的结果" + languageNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = "请帮我分析以下内容（依照内容选择一个最合适的角度进行分析即可），并直接返回分析的结果" + languageNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def useOCR(request):
-    if request.method == "POST":
-        file_path = utils.saveFile(request)
-        return JsonResponse({"status": True, "answer": utils.handleOCR(file_path)})
-        # return JsonResponse({"status": True, "answer": "ok"})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            file_path = utils.saveFile(request)
+            return JsonResponse({"status": True, "answer": utils.handleOCR(file_path)})
+            # return JsonResponse({"status": True, "answer": "ok"})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 
 @csrf_exempt
 def voiceRecognise(request):
-    if request.method == "POST":
-        file_path = utils.saveFile(request)
-        return JsonResponse({"status": True, "answer": utils.handleVoice(file_path)})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            file_path = utils.saveFile(request)
+            return JsonResponse({"status": True, "answer": utils.handleVoice(file_path)})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def videoRecognise(request):
-    if request.method == "POST":
-        file_path = utils.saveFile(request)
-        print(file_path)
-        return JsonResponse({"status": True, "answer": utils.handleVidio(file_path)})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            file_path = utils.saveFile(request)
+            print(file_path)
+            return JsonResponse({"status": True, "answer": utils.handleVidio(file_path)})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 
 @csrf_exempt
 def projectDocument(request):
-    if request.method == "POST":
-        prompt = """
-            假设你是一个大学生，正在参加学校组织的大学生创新创业项目，下面就是关于项目的简介，请你根据下面的内容，
-            写一份详细的项目申请书文档，内容包括：项目背景与意义、项目目标与预期成果、研究内容与方法（理论依据）、
-            创新点、技术路线与实施计划等，
-        """ + formatNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = """
+                假设你是一个大学生，正在参加学校组织的大学生创新创业项目，下面就是关于项目的简介，请你根据下面的内容，
+                写一份详细的项目申请书文档，内容包括：项目背景与意义、项目目标与预期成果、研究内容与方法（理论依据）、
+                创新点、技术路线与实施计划等，
+            """ + formatNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def codeEdit(request):
-    if request.method == "POST":
-        prompt = """
-           假设你是一个程序员，请根据下面的需求和语言写代码，如果用户没有指定使用的语言，就写Python代码，
-           可以在关键代码和重要变量（如参数等）的旁边加上注释，将代码写在markdown的代码块中，
-           除了代码块不要给我任何其他的内容，将所有代码都生成完毕再将结果返回给我
-       """
-        response = utils.getAIResponse(request, prompt)
-        code = utils.getCode(response.get_result())
-        return JsonResponse({"status": True, "answer": code if code != "" else response.get_result() })
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = """
+               假设你是一个程序员，请根据下面的需求和语言写代码，如果用户没有指定使用的语言，就写Python代码，
+               可以在关键代码和重要变量（如参数等）的旁边加上注释，将代码写在markdown的代码块中，
+               除了代码块不要给我任何其他的内容，将所有代码都生成完毕再将结果返回给我
+           """
+            response = utils.getAIResponse(request, prompt)
+            code = utils.getCode(response.get_result())
+            return JsonResponse({"status": True, "answer": code if code != "" else response.get_result() })
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def makeBar(request):
-    if request.method == "POST":
-        # print(request.POST.get("question"))
-        # prompt = """
-        #     假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
-        #     图表的类型为柱状图，图中元素不要相互遮挡，最左侧和最右侧的元素不要超出边界和坐标轴，留一下段距离
-        #     不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块（json格式，其中不要加任何注释 // ）中，
-        # """
-        prompt = """
-            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
-            图表的类型为柱状图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
-            json 文件的格式，
-        """
-        response = utils.getAIResponse(request, prompt)
-        print(response.get_result())
-        print(json.loads(utils.getJson(response.get_result())))
-        return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
+    try:
+        if request.method == "POST":
+            # print(request.POST.get("question"))
+            # prompt = """
+            #     假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据
+            #     图表的类型为柱状图，图中元素不要相互遮挡，最左侧和最右侧的元素不要超出边界和坐标轴，留一下段距离
+            #     不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块（json格式，其中不要加任何注释 // ）中，
+            # """
+            prompt = """
+                假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
+                图表的类型为柱状图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
+                json 文件的格式，
+            """
+            response = utils.getAIResponse(request, prompt)
+            print(response.get_result())
+            print(json.loads(utils.getJson(response.get_result())))
+            return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
         # return JsonResponse({"status": True, "answer": "ok"})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def makePie(request):
-    if request.method == "POST":
-        prompt = """
-            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
-            图表的类型为饼图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
-            json 文件的格式，
-        """
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = """
+                假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
+                图表的类型为饼图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
+                json 文件的格式，
+            """
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def makeLine(request):
-    if request.method == "POST":
-        prompt = """
-            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
-            图表的类型为折线图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
-            请注意json 文件的格式，不要写错，
-        """
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = """
+                假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
+                图表的类型为折线图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
+                请注意json 文件的格式，不要写错，
+            """
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def makeScatter(request):
-    if request.method == "POST":
-        prompt = """
-            假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
-            图表的类型为散点图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
-            请注意json文件的格式，不要写错，不要在json对象中写注释，数据结构类似这样，
-            option = {
-              xAxis: {},
-              yAxis: {},
-              series: [
-                {
-                  symbolSize: 20,
-                  data: [
-                    [10.0, 8.04],
-                    [8.07, 6.95],
-                    [13.0, 7.58],
-                    [9.05, 8.81]
-                  ],
-                  type: 'scatter'
-                }
-              ]
-            };
-        """
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = """
+                假设你正在使用echarts，请你根据下面用户输入的内容和数据，生成一份类型为 EChartsOption 的配置数据，
+                图表的类型为散点图，不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块，
+                请注意json文件的格式，不要写错，不要在json对象中写注释，数据结构类似这样，
+                option = {
+                  xAxis: {},
+                  yAxis: {},
+                  series: [
+                    {
+                      symbolSize: 20,
+                      data: [
+                        [10.0, 8.04],
+                        [8.07, 6.95],
+                        [13.0, 7.58],
+                        [9.05, 8.81]
+                      ],
+                      type: 'scatter'
+                    }
+                  ]
+                };
+            """
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def makeMindMap(request):
-    if request.method == "POST":
-        prompt = """
-            假设你正在使用Mind elixir，请你根据下面用户输入的内容，生成一份类型为 MindElixirData 的配置数据，
-            这份配置数据是思维导图的初始数据，等待所有数据全部生成再将结果返回，思维导图的项不要超过15个，
-            数据结构类似这样：            {
-                                          nodeData: {
-                                            id: 'root',
-                                            topic: 'root',
-                                            children: [
-                                              {
-                                                id: 'sub1',
-                                                topic: 'sub1',
+    try:
+        if request.method == "POST":
+            prompt = """
+                假设你正在使用Mind elixir，请你根据下面用户输入的内容，生成一份类型为 MindElixirData 的配置数据，
+                这份配置数据是思维导图的初始数据，等待所有数据全部生成再将结果返回，思维导图的项不要超过15个，
+                数据结构类似这样：            {
+                                              nodeData: {
+                                                id: 'root',
+                                                topic: 'root',
                                                 children: [
                                                   {
-                                                    id: 'sub2',
-                                                    topic: 'sub2',
+                                                    id: 'sub1',
+                                                    topic: 'sub1',
+                                                    children: [
+                                                      {
+                                                        id: 'sub2',
+                                                        topic: 'sub2',
+                                                      },
+                                                    ],
                                                   },
                                                 ],
                                               },
-                                            ],
-                                          },
-                                        }，
-            不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块（json格式，其中不要加任何注释 // ）中，
-        """
-        response = utils.getAIResponse(request, prompt)
-        # print(response.get_result())
-        # print(json.loads(utils.getJson(response.get_result())))
-        return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+                                            }，
+                不需要说明如何使用，只要配置项，直接在 {} 中写配置项，放在markdown代码块（json格式，其中不要加任何注释 // ）中，
+            """
+            response = utils.getAIResponse(request, prompt)
+            # print(response.get_result())
+            # print(json.loads(utils.getJson(response.get_result())))
+            return JsonResponse({"status": True, "answer": json.loads(utils.getJson(response.get_result()))})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 
 @csrf_exempt
 def autoTypography(request):
-    if request.method == "POST":
-        print(request.POST.get("question"))
-        prompt = """
-            你是一个乐于助人的markdown排版专家，请你将以下文本按照markdown形式排版，
-            包括但不限于从一级开始设置标题等级，设置字号，设置加粗等修改，
-            注意不要输出除markdown代码之外的任何内容，也不要对原文本的内容进行删减，只修改为markdown格式！
-        """
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            # print(request.POST.get("question"))
+            prompt = """
+                你是一个乐于助人的markdown排版专家，请你将以下文本按照markdown形式排版，
+                包括但不限于从一级开始设置标题等级，设置字号，设置加粗等修改，
+                注意不要输出除markdown代码之外的任何内容，也不要对原文本的内容进行删减，只修改为markdown格式！
+            """
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 
 @csrf_exempt
 def personResume(request):
-    if request.method == "POST":
-        prompt = """
-            假设你是一个求职者，正在编写你的个人简历，下面就是你的个人简介、工作经验等信息，请你根据下面的内容，
-            写一份详细的个人简历，内容包括但不限于：个人信息，职业目标，教育背景，工作经验，技能，项目经验等，
-            可以对信息进行适当的扩展，注意排版（markdown格式），默认是中文简历，如果要求英文，则返回英文简历
-        """ + formatNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = """
+                假设你是一个求职者，正在编写你的个人简历，下面就是你的个人简介、工作经验等信息，请你根据下面的内容，
+                写一份详细的个人简历，内容包括但不限于：个人信息，职业目标，教育背景，工作经验，技能，项目经验等，
+                可以对信息进行适当的扩展，注意排版（markdown格式），默认是中文简历，如果要求英文，则返回英文简历
+            """ + formatNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def commonUse(request):
-    if request.method == "POST":
-        prompt = """
-            下面是用户的需求（或者问题等），请给出你的建议（或者解决方案等），
-        """ + formatNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = """
+                下面是用户的需求（或者问题等），请给出你的建议（或者解决方案等），
+            """ + formatNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
 def testReport(request):
-    if request.method == "POST":
-        prompt = """
-            假设你是一个研究员，正在做一项实验，因此你需要写一份实验报告，下面就是你的实验内容和结果，
-            写一份详细的实验报告，内容包括但不限于：实验目的，实验环境，实验材料和方法，实验结果，分析，结论，参考文献等，
-            可以对信息进行适当的扩展，注意排版（markdown格式），默认是中文报告，如果要求英文，则返回英文报告
-        """ + formatNote
-        response = utils.getAIResponse(request, prompt)
-        return JsonResponse({"status": True, "answer": response.get_result()})
-    return JsonResponse({"status": False, "error": "请求方法错误"})
+    try:
+        if request.method == "POST":
+            prompt = """
+                假设你是一个研究员，正在做一项实验，因此你需要写一份实验报告，下面就是你的实验内容和结果，
+                写一份详细的实验报告，内容包括但不限于：实验目的，实验环境，实验材料和方法，实验结果，分析，结论，参考文献等，
+                可以对信息进行适当的扩展，注意排版（markdown格式），默认是中文报告，如果要求英文，则返回英文报告
+            """ + formatNote
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": response.get_result()})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
