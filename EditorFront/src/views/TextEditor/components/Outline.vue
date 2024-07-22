@@ -50,6 +50,7 @@
     // background: rgba(black, 0.1);
     height: 100%;
     overflow-y: auto; /* 添加滚动条 */
+    
 
     &__list {
       list-style: none;

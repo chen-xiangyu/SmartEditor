@@ -1,8 +1,7 @@
 <template>
   <el-container 
-    style="height: 100vh; display: flex; flex-direction: column;" 
+    style="height: 100vh; width: 100vw; background-color: #FCF5E4;" 
     ref="fileContRef" 
-    class="main-container"
     @mousedown="notSee($event)" 
   >
     <ul 
@@ -116,7 +115,7 @@
 
     <Loader v-if="visibleLoader"/>
 
-    <el-header class="header-inner" style="padding: 0;">
+    <el-header style="padding: 0; height: 60px;">
       <el-menu mode="horizontal" :ellipsis="false" style="background-color: #FCF5E4;">
         <el-menu-item class="logo-item" style="background-color: inherit !important;">
           <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
@@ -143,39 +142,46 @@
       </el-menu>
     </el-header>
 
-    <el-container style="flex: 1;">
-      <el-aside width="20%" style="height: 100%; background-color: #E4DCC8;">
-        <Outline/>
-      </el-aside>
-      <el-main style="height: 100%; padding: 0; background-color: #FCF5E4;">
-        <div class="menu-outer">
-          <Menu 
-          class="menu-inner"
-          :editor="editor as Editor" 
-          :showUploadDialog="showUploadDialog"
-          :showVoiceInput="showVoiceInput"
-          :showTextInput="showTextInput"
-          :addImageByBase64="addImageByBase64"
-          :autoTypography="autoTypography"
-          />
-        </div>
+    <el-container style="width: 100vw;">
+      <el-scrollbar style="height: calc(100vh - 60px); width: 20%;">
+        <el-aside style="height: calc(100vh - 60px); background-color: #E4DCC8; width: 100%;">
+          <Outline/>
+        </el-aside>
+      </el-scrollbar>
 
-        <editor-content 
-          class="editor-content"
-          :editor="editor"
-          @scroll="hasScroll()"
-          @mousedown="notSee($event)"
-          @mousemove="mouseMove()" 
-          @mouseup="selectText($event)" 
-          @paste="handlePaste"
-        />
-      </el-main>
+      <el-container>
+        <el-header style="padding: 0;">
+          <Menu 
+            :editor="editor as Editor" 
+            :showUploadDialog="showUploadDialog"
+            :showVoiceInput="showVoiceInput"
+            :showTextInput="showTextInput"
+            :addImageByBase64="addImageByBase64"
+            :autoTypography="autoTypography"
+          />
+        </el-header>
+
+        <el-scrollbar style="height: calc(100vh - 60px - 4rem);">
+          <el-main style="background-color: #FCF5E4;">
+            <editor-content 
+              class="editor-content"
+              :editor="editor"
+              @mousedown="notSee($event)"
+              @mousemove="mouseMove()" 
+              @mouseup="selectText($event)" 
+              @paste="handlePaste"
+            />
+          </el-main>
+        </el-scrollbar>
+      </el-container>
+      <!-- <el-main style="height: 100%; padding: 0; background-color: #FCF5E4;">
+      </el-main> -->
     </el-container>
   </el-container>
 </template>
 
 <script setup lang="ts" name="TextEditor">
-  import { ref, reactive, computed, onMounted, onUnmounted } from "vue"
+  import { ref, reactive, computed } from "vue"
   import { useEditor, EditorContent, Editor } from "@tiptap/vue-3"
   import StarterKit from '@tiptap/starter-kit'
   import Highlight from '@tiptap/extension-highlight'
@@ -210,7 +216,7 @@
 
   // import { useEditorStore } from '@/store'
   import { useEditorStore } from '../../store'
-import { colCount } from "@tiptap/pm/tables"
+// import { colCount } from "@tiptap/pm/tables"
   // import { fa } from "element-plus/es/locales.mjs"
   // import { handlePaste } from "@tiptap/pm/tables"
   const router = useRouter()
@@ -385,10 +391,10 @@ import { colCount } from "@tiptap/pm/tables"
     // selection.value=""
   }
   //滚轮滚动
-  const hasScroll = () => {
-    visibleMenu.value = false
-    // window.getSelection().removeAllRanges()
-  }
+  // const hasScroll = () => {
+  //   visibleMenu.value = false
+  //   // window.getSelection().removeAllRanges()
+  // }
   const replace = () => {
     const selection = editor.value?.state.selection
     if (selection) { // 检查 selection 是否为 undefined
@@ -727,15 +733,6 @@ import { colCount } from "@tiptap/pm/tables"
 </script>
 
 <style lang="scss" scoped>
-  .main-container {
-    overflow-y: scroll;
-    scrollbar-width: none; 
-  }
-
-  .main-container::-webkit-scrollbar {
-    display: none; /* 对Chrome, Safari和Edge有效 */
-  }
-
   .dialog-footer {
     display: flex;
     justify-content: flex-end;
@@ -790,15 +787,6 @@ import { colCount } from "@tiptap/pm/tables"
 
   .logo{
     height: 50px; /* 调整logo的高度 */
-  }
-
-  .header-inner {
-    width: 100vw; /* 100% viewport width */
-    position: sticky; /* 固定在页面顶部 */
-    // position: sticky;
-    top: 0px;
-    left: 0px;
-    z-index: 1000; /* 确保位于其他内容之上 */
   }
 
   .menu-outer {
@@ -909,6 +897,7 @@ b {
 
   /* 自定义滚动条样式 */
   .ProseMirror::-webkit-scrollbar {
+    display: none;
     width: 12px; /* 滚动条宽度 */
   }
 
