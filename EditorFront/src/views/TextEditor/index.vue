@@ -44,6 +44,7 @@
       <template v-else>
         <el-input
           v-model="cardMsg"
+          ref="cardMsgRef"
           :autosize="{ minRows: 1, maxRows: 16 }"
           type="textarea"
           :placeholder="textPrompt"
@@ -419,19 +420,28 @@
     visibleCard.value = false
     visibleChart.value = false
   }
+  const cardMsgRef = ref()
   const copyText = async () => {
-    try {
-      await navigator.clipboard.writeText(cardMsg.value)
-      ElMessage({
-        message: '已成功复制到粘贴板',
-        type: 'success',
-        plain: true,
-      })
-      visibleCard.value = false
-      console.log('文本已复制到剪贴板')
-    } catch (err) {
-      console.error('复制失败:', err)
-    }
+    cardMsgRef.value.select()
+    document.execCommand('copy');
+    ElMessage({
+      message: '已成功复制到粘贴板',
+      type: 'success',
+      plain: true,
+    })
+    visibleCard.value = false
+    // try {
+    //   await navigator.clipboard.writeText(cardMsg.value)
+    //   ElMessage({
+    //     message: '已成功复制到粘贴板',
+    //     type: 'success',
+    //     plain: true,
+    //   })
+    //   visibleCard.value = false
+    //   console.log('文本已复制到剪贴板')
+    // } catch (err) {
+    //   console.error('复制失败:', err)
+    // }
   }
 
     // 获取标题（大纲）
