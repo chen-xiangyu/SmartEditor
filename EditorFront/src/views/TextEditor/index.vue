@@ -149,7 +149,7 @@
         </el-aside>
       </el-scrollbar>
 
-      <el-container>
+      <el-container style="width: 80%;">
         <el-header style="padding: 0;">
           <Menu 
             :editor="editor as Editor" 
@@ -951,7 +951,7 @@ b {
   table {
     border-collapse: collapse;
     table-layout: fixed;
-    width: 100%;
+    width: 80%;
     margin: 0;
     overflow: hidden;
 
