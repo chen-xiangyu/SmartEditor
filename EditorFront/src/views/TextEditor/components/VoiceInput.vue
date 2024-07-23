@@ -12,6 +12,22 @@
         <div style="height: 100px; width: 300px;" ref="recwave"></div>
       </div>
     </div>
+    <!-- <div style="padding: 10px;">
+      <el-text class="mx-1" style="font-size: 25px;" type="warning">注意事项:</el-text> <br>
+      <el-text class="mx-1">由于浏览器安全策略限制, http使用录音功能需要进行如下设置：</el-text><br>
+      <el-text class="mx-1">&nbsp;&nbsp;&nbsp;&nbsp;Chrome/Edge (即Chromium内核浏览器): 访问chrome://flags/#unsafely-treat-insecure-origin-as-secure, 启用此项, 并在文本框中填入http://113.45.217.227</el-text><br>
+      <el-text class="mx-1">&nbsp;&nbsp;&nbsp;&nbsp;Firefox: 访问about:config, 勾选"当我尝试修改底层首选项时警示我", 点击"接受风险并继续"。搜索框输入insecure, 然后回车搜索相关设置选项, media.devices.insecure.enabled改为true, media.getusermedia.insecure.enabled改为true。重新访问113.45.217.227即可。</el-text><br>
+    </div> -->
+    <div style="padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 8px;">
+      <el-text class="mx-1" style="font-size: 20px; color: #f56c6c;" type="warning">注意事项:</el-text> 
+      <br><br>
+      <el-text class="mx-1" style="font-size: 12px;">由于浏览器安全策略限制, http使用录音功能需要进行如下设置：</el-text>
+      <br><br>
+      <el-text class="mx-1" style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;Chrome/Edge (即Chromium内核浏览器): 访问 <code style="background-color: #f2f2f2; padding: 2px 4px; border-radius: 4px;">chrome://flags/#unsafely-treat-insecure-origin-as-secure</code>, 启用此项, 并在文本框中填入 <code style="background-color: #f2f2f2; padding: 2px 4px; border-radius: 4px;">http://113.45.217.227</code></el-text>
+      <br><br>
+      <el-text class="mx-1" style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;Firefox: 访问 <code style="background-color: #f2f2f2; padding: 2px 4px; border-radius: 4px;">about:config</code>, 勾选 "当我尝试修改底层首选项时警示我", 点击 "接受风险并继续"。搜索框输入 <code style="background-color: #f2f2f2; padding: 2px 4px; border-radius: 4px;">insecure</code>, 然后回车搜索相关设置选项, <code style="background-color: #f2f2f2; padding: 2px 4px; border-radius: 4px;">media.devices.insecure.enabled</code> 改为 true, <code style="background-color: #f2f2f2; padding: 2px 4px; border-radius: 4px;">media.getusermedia.insecure.enabled</code> 改为 true。重新访问 113.45.217.227 即可。</el-text>
+    </div>
+
   </div>
 </template>
 
@@ -136,5 +152,8 @@
 </script>
 
 <style lang="scss" scoped>
-
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
 </style>
