@@ -9,6 +9,8 @@ import json
 from PIL import Image
 import os
 from django.conf import settings
+from pydub import AudioSegment
+from moviepy.editor import VideoFileClip
 # Create your views here.
 
 # erniebot.api_type = 'aistudio'
@@ -227,6 +229,9 @@ def voiceRecognise(request):
     try:
         if request.method == "POST":
             file_path = utils.saveFile(request)
+            audio = AudioSegment.from_file(file_path)
+            if len(audio) > 40000:
+                return JsonResponse({"status": False, "error": "请求方法错误"})
             return JsonResponse({"status": True, "answer": utils.handleVoice(file_path)})
     except Exception as e:
         return JsonResponse({"status": False, "error": "请求方法错误"})
@@ -236,7 +241,10 @@ def videoRecognise(request):
     try:
         if request.method == "POST":
             file_path = utils.saveFile(request)
-            print(file_path)
+            video = VideoFileClip(file_path)
+            audio = video.audio
+            if audio.duration > 40:
+                return JsonResponse({"status": False, "error": "请求方法错误"})
             return JsonResponse({"status": True, "answer": utils.handleVidio(file_path)})
     except Exception as e:
         return JsonResponse({"status": False, "error": "请求方法错误"})
