@@ -222,10 +222,11 @@
   // import { handlePaste } from "@tiptap/pm/tables"
   const router = useRouter()
   const editorStore = useEditorStore()
-  // 编辑器
+// 编辑器
+  const savedContent = localStorage.getItem('editorContent');
   const editor = useEditor({
     // content: "我正在使用 Vue.js 运行 Tiptap。",
-    content: ``,
+    content: `` || savedContent,
     extensions: [
       StarterKit,
       Highlight.configure({
@@ -263,6 +264,8 @@
     onUpdate({ editor }) {
       loadHeadings()
       editorStore.setEditorInstance(editor)
+      const content = editor.getHTML();
+      localStorage.setItem('editorContent', content);
     },
     onCreate({ editor }) {
       loadHeadings()
