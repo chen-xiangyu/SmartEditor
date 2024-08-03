@@ -576,3 +576,33 @@ def deleteFile(request):
         }
         return JsonResponse(params)
     return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def getCoins(request):
+    if request.method == "GET":
+        account = request.META.get('HTTP_ACCOUNT')
+        user = User.objects.get(account=account)
+        params = {
+            "status": True,
+            "coins": user.coins,
+        }
+        return JsonResponse(params)
+    return JsonResponse({"status": False, "etype": 0, "error": "请求方法错误"})
+
+@csrf_exempt
+def recharge(request):
+    if request.method == "POST":
+        account = request.META.get('HTTP_ACCOUNT')
+        print(request.POST)
+        amount = request.POST.get('amount')
+        user = User.objects.get(account=account)
+        user.coins += int(amount)
+        user.save()
+
+        params = {
+            "status": True,
+            "message": "充值成功",
+            "coins": user.coins,
+        }
+        return JsonResponse(params)
+    return JsonResponse({"status": False, "etype": 0, "error": "请求方法错误"})

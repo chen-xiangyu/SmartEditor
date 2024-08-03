@@ -166,6 +166,11 @@
         </el-menu-item>
         <div class="flex-grow" />
         <el-menu-item>
+          <span @click="rechargeCoinsClick" style="cursor: pointer;">
+            硬币：{{ coins }}个，点击充值
+          </span>
+        </el-menu-item>
+        <el-menu-item>
           <el-dropdown>
             <template #default>
             <span class="el-dropdown-link">
@@ -184,6 +189,40 @@
           </el-dropdown>
         </el-menu-item>
       </el-menu>
+
+      <el-dialog v-model="rechargeDialogVisible" width="70%">
+        <template #title>
+          <span class="custom-dialog-title">充值</span>
+        </template>
+        <div class="recharge-panel">
+          <div class="section-title">支付金额</div>
+          <div class="amount-options">
+            <div v-for="(option, index) in amountOptions" :key="index" :class="['amount-option', { selected: selectedAmount === option.value }]" @click="selectAmount(option.value)">
+              <div>{{ option.label }}</div>
+              <div>{{ option.price }}</div>
+              <div v-if="selectedAmount === option.value" class="checkmark">✔</div>
+            </div>
+            <div :class="['amount-option', { selected: selectedAmount === 'custom' }]" @click="selectAmount('custom')">
+              <div>其他金额</div>
+              <div>
+                <el-input v-if="selectedAmount === 'custom'" v-model="rechargeAmount" placeholder="请输入充值金额" style="width: auto;height:20px;"></el-input>
+              </div>
+              <div v-if="selectedAmount === 'custom'" class="checkmark">✔</div>
+            </div>
+          </div>
+          <div class="section-title">付款方式</div>
+          <div class="payment-methods">
+            <div v-for="(method, index) in paymentMethods" :key="index" :class="['payment-method', { selected: selectedPaymentMethod === method.value }]" @click="selectPaymentMethod(method.value)">
+              <div>{{ method.label }}</div>
+              <div v-if="selectedPaymentMethod === method.value" class="checkmark">✔</div>
+            </div>
+          </div>
+        </div>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="rechargeDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="rechargeCoins">确 定</el-button>
+        </div>
+      </el-dialog>
     </el-header>
 
     <el-container style="width: 100vw;">
@@ -388,6 +427,73 @@
       console.error('POST 请求失败：', error)
       // throw error // 可选的抛出错误
     }
+  }
+
+  // 获取硬币数量
+  const fetchCoins = () => {
+    axios.get('/get-coins/')
+      .then((response) => {
+        coins.value = response.data.coins
+      })
+      .catch((error) => {
+        console.error('获取硬币数量失败：', error)
+      })
+  }
+  const coins = ref(fetchCoins())
+  const rechargeDialogVisible = ref(false)
+  const rechargeAmount = ref(0)
+  const selectedAmount = ref('10')
+  const selectedPaymentMethod = ref('wechat')
+
+  // 充值金额选项
+  const amountOptions = [
+    { label: '10硬币', price: '¥10', value: '10' },
+    { label: '50硬币', price: '¥50', value: '50' },
+    { label: '100硬币', price: '¥100', value: '100' },
+  ]
+
+  // 支付方式选项
+  const paymentMethods = [
+    { label: '微信', value: 'wechat' },
+    { label: '支付宝', value: 'alipay' },
+  ]
+  // 选择充值金额
+  const selectAmount = (value) => {
+    selectedAmount.value = value
+  }
+
+  // 选择支付方式
+  const selectPaymentMethod = (value) => {
+    selectedPaymentMethod.value = value
+  }
+
+  // 充值硬币
+  const rechargeCoinsClick = () => {
+    rechargeDialogVisible.value = true
+  }
+  const rechargeCoins = async () => {
+    let amount=selectedAmount.value==='custom'?rechargeAmount.value:parseInt(selectedAmount.value)
+    if (amount <= 0) {
+      ElMessage.error('充值金额必须大于0')
+      return
+    }
+    try {
+      const formData = new FormData()
+      formData.append('amount', amount.toString())
+      const response = await axios.post('/recharge/', formData)
+      let res = response.data
+      if(res.status){
+        ElMessage.success('充值成功')
+        fetchCoins()
+      } else{
+        ElMessage.error('充值失败')
+      }
+      console.log('POST 请求成功：', response.data)
+    } catch (error) {
+      console.error('POST 请求失败：', error)
+    }
+    rechargeDialogVisible.value = false
+    return false;
   }
 
   const fileContRef = ref(null)
@@ -1059,6 +1165,56 @@
     width: 1.1rem;
     height: 1.1rem;
     margin-right: 5px; /* 增加与文本的间距 */
+  }
+
+  .custom-dialog-title {
+    font-size: 20px; 
+    font-weight: bold; 
+  }
+
+  .recharge-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    align-self: flex-start;
+  }
+
+  .amount-options, .payment-methods {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .amount-option, .payment-method {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 10px;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    flex: 1;
+    font-size: 20px;
+  }
+
+  .amount-option.selected, .payment-method.selected {
+    border-color: #409EFF;
+    background-color: #E6F7FF;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: #409EFF;
   }
 </style>
 

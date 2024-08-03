@@ -59,4 +59,6 @@ urlpatterns = [
     path('rename-file/', views.renameFile),
     path('delete-file/', views.deleteFile),
 
+    path('get-coins/', views.getCoins),
+    path('recharge/', views.recharge),
 ]
