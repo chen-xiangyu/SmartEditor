@@ -165,8 +165,8 @@
           <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
         </el-menu-item>
         <div class="flex-grow" />
-        <el-menu-item>
-          <span @click="rechargeCoinsClick" style="cursor: pointer;">
+        <el-menu-item style="background-color: inherit; padding: 0;">
+          <span @click="rechargeCoinsClick" style="cursor: pointer; color: #606266;" class="coin-item">
             硬币：{{ coins }}个，点击充值
           </span>
         </el-menu-item>
@@ -1039,7 +1039,6 @@
     }
     visibleDeleteFile.value = false
   }
-
 </script>
 
 <style lang="scss" scoped>
@@ -1215,6 +1214,12 @@
     top: 5px;
     right: 5px;
     color: #409EFF;
+  }
+  .coin-item {
+    padding: 0 20px;
+  }
+  .coin-item:hover {
+    background-color: #ECF5FF;
   }
 </style>
 

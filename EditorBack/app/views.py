@@ -568,11 +568,17 @@ def renameFile(request):
 @csrf_exempt
 def deleteFile(request):
     if request.method == "POST":
-        print(request.POST)
+        file_id = request.POST.get("id")
+
+        delete_file = models.File.objects.filter(id=file_id).first()
+        delete_file_path = delete_file.get_file_path()
+        if os.path.exists(delete_file_path):
+            os.remove(delete_file_path)
+        delete_file.delete()
 
         params = {
             "status": True,
-            "message": "成功修改文件名",
+            "message": "成功删除文件",
         }
         return JsonResponse(params)
     return JsonResponse({"status": False, "error": "请求方法错误"})

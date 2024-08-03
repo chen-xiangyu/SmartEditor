@@ -285,7 +285,7 @@
     color: #333;
   }
 
-  .context-drop .item:hover {
+  .context-dropdown .item:hover {
     background: rgb(205, 206, 210);
   }
 </style>
