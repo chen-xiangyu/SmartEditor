@@ -5,7 +5,9 @@ from django.contrib.auth.hashers import make_password, check_password
 from app.models import User
 from app.utils import create_token
 from app import utils
+from app import models
 import json
+from django.core.files.base import ContentFile
 from PIL import Image
 import os
 from django.conf import settings
@@ -39,6 +41,14 @@ def signUp(request):
         user = User(name="user" + account, account=account, password=hashed_password)
         user.save()
 
+        empty_file = ContentFile("".encode('utf-8'))
+        empty_file.name = "undefined.html"  # 指定文件名
+        first_file = models.File(
+            name="undefined",
+            creator=user,
+            file=empty_file,
+        )
+        first_file.save()
         params = {
             "status": True,
             "message": "注册成功",
@@ -450,3 +460,90 @@ def testReport(request):
             return JsonResponse({"status": True, "answer": response.get_result()})
     except Exception as e:
         return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def getCatalog(request):
+    if request.method == "POST":
+        account = request.META.get('HTTP_ACCOUNT')
+        user = User.objects.get(account=account)
+
+        files = models.File.objects.filter(creator=user)
+        filename_list = [{"id": file.id, "name": file.name} for file in files]
+
+        if files.exists():
+            latest_file = files.order_by('-created_time').first()
+            current_file_content = latest_file.file.read().decode('utf-8')  # 读取文件内容并解码为字符串
+            current_file_id = latest_file.id
+        else:
+            current_file_content = ""
+            current_file_id = 0
+
+        params = {
+            "status": True,
+            "filenameList": filename_list,
+            "currentFile": current_file_content,
+            "currentFileID": current_file_id,
+        }
+        return JsonResponse(params)
+    return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def updateFile(request):
+    if request.method == "POST":
+        print(request.POST)
+        file_id = request.POST.get("id")
+        content = request.POST.get("content")
+
+        current_file = models.File.objects.get(id=file_id)
+        #
+        # new_file = ContentFile(content.encode('utf-8'))
+        # new_file.name = current_file.name + ".html"  # 指定文件名
+        # current_file.file = new_file
+        # current_file.save()
+        # 更新文件内容
+        file_path = current_file.get_file_path()
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        current_file.save()  # 更新文件的修改时间等
+        params = {
+            "status": True,
+            "message": "成功更新文件",
+        }
+        return JsonResponse(params)
+    return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def createNewFile(request):
+    if request.method == "POST":
+        account = request.META.get('HTTP_ACCOUNT')
+        filename = request.POST.get("filename")
+        user = User.objects.get(account=account)
+
+        empty_file = ContentFile("".encode('utf-8'))
+        empty_file.name =  filename + ".html"  # 指定文件名
+        new_file = models.File(
+            name=filename,
+            creator=user,
+            file=empty_file,
+        )
+        new_file.save()
+        params = {
+            "status": True,
+            "message": "成功新建文件",
+        }
+        return JsonResponse(params)
+    return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def getCurrentFile(request):
+    if request.method == "POST":
+        file_id = request.POST.get("id")
+        current_file = models.File.objects.filter(id=file_id).first()
+        current_file_content = current_file.file.read().decode('utf-8')  # 读取文件内容并解码为字符串
+
+        params = {
+            "status": True,
+            "content": current_file_content,
+        }
+        return JsonResponse(params)
+    return JsonResponse({"status": False, "error": "请求方法错误"})

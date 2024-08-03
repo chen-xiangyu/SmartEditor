@@ -20,9 +20,9 @@
   .title {
     display: inline-block;
     font-family: "KaiTi", "楷体", "STKaiti", "楷体_GB2312", serif;
-    height: 1.3rem;
+    height: 1.2rem;
     padding: 0.15rem;
-    line-height: 1.3rem;
+    line-height: 1.2rem;
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
     font-weight: bolder;

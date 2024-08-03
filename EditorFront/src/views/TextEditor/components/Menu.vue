@@ -149,18 +149,18 @@
       action: () => props.editor?.chain().focus().toggleUnderline().run(),
       isActive: () => props.editor?.isActive('underline')
     },
-    {
-      icon: 'separator',
-      title: '分割线',
-      action: () => props.editor?.chain().focus().setHorizontalRule().run(),
-      // isActive: () => props.editor?.isActive('underline')
-    },
-    {
-      icon: 'chat-quote-line',
-      title: '引用块',
-      action: () => props.editor?.chain().focus().toggleBlockquote().run(),
-      isActive: () => props.editor?.isActive('blockquote')
-    },
+    // {
+    //   icon: 'separator',
+    //   title: '分割线',
+    //   action: () => props.editor?.chain().focus().setHorizontalRule().run(),
+    //   // isActive: () => props.editor?.isActive('underline')
+    // },
+    // {
+    //   icon: 'chat-quote-line',
+    //   title: '引用块',
+    //   action: () => props.editor?.chain().focus().toggleBlockquote().run(),
+    //   isActive: () => props.editor?.isActive('blockquote')
+    // },
     {
       icon: 'mark-pen-line',
       title: '高亮',
@@ -533,9 +533,9 @@
   .title {
     display: inline-block;
     font-family: "KaiTi", "楷体", "STKaiti", "楷体_GB2312", serif;
-    height: 1.3rem;
+    height: 1.2rem;
     padding: 0.15rem;
-    line-height: 1.3rem;
+    line-height: 1.2rem;
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
     font-weight: bolder;
@@ -548,10 +548,10 @@
     border-radius: 0.4rem;
     color: #333;
     cursor: pointer;
-    height: 1.6rem;
-    padding: 0.2rem;
-    margin-right: 0.25rem;
-    width: 1.6rem;
+    height: 1.3rem;
+    padding: 0.12rem;
+    margin-right: 0.15rem;
+    width: 1.3rem;
 
     svg {
       fill: currentColor;

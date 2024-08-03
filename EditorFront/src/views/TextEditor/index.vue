@@ -114,6 +114,22 @@
       </div>
     </el-dialog>
 
+    <el-dialog v-model="visibleNewFile" title="新建文档" width="500">
+      <el-form :model="formNewFile">
+        <el-form-item label="文档名:" label-width="80px">
+          <el-input v-model="formNewFile.newFilename" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="visibleNewFile = false">取消</el-button>
+          <el-button type="primary" @click="createNewFile">
+            创建
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+
     <Loader v-if="visibleLoader"/>
 
     <el-header style="padding: 0; height: 60px;">
@@ -144,13 +160,18 @@
     </el-header>
 
     <el-container style="width: 100vw;">
-      <el-scrollbar style="height: calc(100vh - 60px); width: 20%;">
+
+      <el-scrollbar style="height: calc(100vh - 60px); width: 18%;">
         <el-aside style="height: calc(100vh - 60px); background-color: #E4DCC8; width: 100%;">
-          <Outline/>
+          <Catalog
+            ref="catalogRef"
+            :setCurrentContent="setCurrentContent" 
+            :showNewFile="showNewFile"
+          />
         </el-aside>
       </el-scrollbar>
 
-      <el-container style="width: 80%;">
+      <el-container style="width: 64%;">
         <el-header style="padding: 0;">
           <Menu 
             :editor="editor as Editor" 
@@ -175,14 +196,20 @@
           </el-main>
         </el-scrollbar>
       </el-container>
-      <!-- <el-main style="height: 100%; padding: 0; background-color: #FCF5E4;">
-      </el-main> -->
+
+      <el-scrollbar style="height: calc(100vh - 60px); width: 18%;">
+        <el-aside style="height: calc(100vh - 60px); background-color: #E4DCC8; width: 100%;">
+          <Outline/>
+        </el-aside>
+      </el-scrollbar>
     </el-container>
+
+
   </el-container>
 </template>
 
 <script setup lang="ts" name="TextEditor">
-  import { ref, reactive, computed } from "vue"
+  import { ref, reactive, computed, onMounted, onBeforeUnmount } from "vue"
   import { useEditor, EditorContent, Editor } from "@tiptap/vue-3"
   import StarterKit from '@tiptap/starter-kit'
   import Highlight from '@tiptap/extension-highlight'
@@ -214,6 +241,7 @@
   import MindMap from "./components/MindMap.vue"
   import Loader from "./components/Loader.vue"
   import { MindElixirData } from 'mind-elixir'
+  import Catalog  from "./components/Catalog.vue"
 
   // import { useEditorStore } from '@/store'
   import { useEditorStore } from '../../store'
@@ -226,7 +254,8 @@
   const savedContent = localStorage.getItem('editorContent');
   const editor = useEditor({
     // content: "我正在使用 Vue.js 运行 Tiptap。",
-    content: `` || savedContent,
+    // content: `` || savedContent,
+    content: ``,
     extensions: [
       StarterKit,
       Highlight.configure({
@@ -266,6 +295,8 @@
       editorStore.setEditorInstance(editor)
       const content = editor.getHTML();
       localStorage.setItem('editorContent', content);
+      // console.log(content);
+      isUpdate.value = true
     },
     onCreate({ editor }) {
       loadHeadings()
@@ -743,6 +774,76 @@
     visibleLoader.value = false
   }
 
+  const currentFileID = ref(0)
+  const isUpdate = ref(false)
+  const setCurrentContent = (content: string, id: number) => {
+    editor.value?.commands.setContent(content)
+    currentFileID.value = id
+  }
+
+  // let saveInterval = null
+  let saveInterval = setInterval(async ()  => {
+    if (isUpdate.value) {
+      const content = editor.value?.getHTML()
+      try {
+        console.log("update file")
+        const formData = new FormData()
+        formData.append('id', currentFileID.value.toString())
+        formData.append('content', content)
+        const response = await axios.post(
+          `/update-file/`,
+          formData,
+        )
+        let res = response.data
+        console.log(res.answer)
+        if (res.status){
+          isUpdate.value = false
+          console.log(isUpdate.value)
+        } else{
+          console.log(res.error)
+        }
+        console.log('POST 请求成功：', response.data)
+      } catch (error) {
+        console.error('POST 请求失败：', error)
+      }
+    }
+  }, 2000);
+
+  const catalogRef = ref(null)
+
+  const visibleNewFile = ref(false)
+  const formNewFile = ref({
+    newFilename: ''
+  })
+
+  const showNewFile = () => {
+    visibleNewFile.value = true
+  }
+
+  const createNewFile = async () => {
+    try {
+      const formData = new FormData()
+      formData.append('filename', formNewFile.value.newFilename)
+      const response = await axios.post(
+        `/create-file/`,
+        formData,
+      )
+      let res = response.data
+      console.log(res.answer)
+      if (res.status){
+        catalogRef.value.getCatalog()
+      } else{
+
+      }
+      console.log('POST 请求成功：', response.data)
+      
+    } catch (error) {
+      console.error('POST 请求失败：', error)
+    }
+    visibleNewFile.value = false
+    formNewFile.value.newFilename = ""
+  }
+
 </script>
 
 <style lang="scss" scoped>
@@ -826,7 +927,7 @@
     width: 220px; /* 调整宽度以适应两列布局 */
     margin: 0;
     background: #EAEAEB;
-    z-index: 3000;
+    z-index: 1000;
     position: absolute;
     list-style-type: none;
     padding: 5px; /* 调整填充 */

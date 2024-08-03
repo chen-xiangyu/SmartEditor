@@ -15,7 +15,7 @@ class User(models.Model):
         return self.name
 def file_directory_path(instance, filename):
     # 文件将上传到 MEDIA_ROOT/user_<creator_id>/<filename>
-    return os.path.join(f'user_{instance.creator.id}', filename)
+    return os.path.join(f'user_{instance.creator.id}', f"{filename}")
 
 class File(models.Model):
     name = models.CharField(verbose_name="文件名", max_length=128)

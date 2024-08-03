@@ -52,5 +52,10 @@ urlpatterns = [
     path('person-resume/', views.personResume),
     path('common-use/', views.commonUse),
     path('test-report/', views.testReport),
+    path('get-catalog/', views.getCatalog),
+    path('update-file/', views.updateFile),
+    path('create-file/', views.createNewFile),
+    path('get-current-file/', views.getCurrentFile),
+
 
 ]
