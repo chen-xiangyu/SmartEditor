@@ -130,6 +130,33 @@
       </template>
     </el-dialog>
 
+    <el-dialog v-model="visibleRenameFile" title="重命名" width="500">
+      <el-form :model="formRenameFile">
+        <el-form-item label="文档名:" label-width="80px">
+          <el-input v-model="formRenameFile.newFilename" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="visibleRenameFile = false">取消</el-button>
+          <el-button type="primary" @click="renameFile">
+            修改
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+
+    <el-dialog v-model="visibleDeleteFile" title="请确认是否删除" width="500">
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="visibleDeleteFile = false">取消</el-button>
+          <el-button type="danger" @click="deleteFile">
+            删除
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+
     <Loader v-if="visibleLoader"/>
 
     <el-header style="padding: 0; height: 60px;">
@@ -167,6 +194,8 @@
             ref="catalogRef"
             :setCurrentContent="setCurrentContent" 
             :showNewFile="showNewFile"
+            :showRenameFile = "showRenameFile"
+            :showDeleteFile = "showDeleteFile"
           />
         </el-aside>
       </el-scrollbar>
@@ -417,9 +446,12 @@
 
   //鼠标点击
   const notSee = (e: MouseEvent) => {
+    console.log("nosee")
     visibleMenu.value = false
+    catalogRef.value.closeDropdown()
     // if (isMouseNotInRect(e, menuRef.value.$el.getBoundingClientRect())) visibleMenu.value = false
     if (isMouseNotInRect(e, cardRef.value.$el.getBoundingClientRect())) visibleCard.value = false
+
   }
   const seeMenu = () => {
     visibleMenu.value = true
@@ -815,7 +847,6 @@
   const formNewFile = ref({
     newFilename: ''
   })
-
   const showNewFile = () => {
     visibleNewFile.value = true
   }
@@ -842,6 +873,65 @@
     }
     visibleNewFile.value = false
     formNewFile.value.newFilename = ""
+  }
+
+  const visibleRenameFile = ref(false)
+  const formRenameFile = ref({
+    newFilename: ''
+  })
+  const rightClickFileID = ref(0)
+  const showRenameFile = (oldName: string, id: number) => {
+    formRenameFile.value.newFilename = oldName
+    visibleRenameFile.value = true
+    rightClickFileID.value = id
+  }
+
+  const renameFile = async () => {
+    try {
+      const formData = new FormData()
+      formData.append('filename', formRenameFile.value.newFilename)
+      formData.append('id', rightClickFileID.value.toString())
+      const response = await axios.post(
+        `/rename-file/`,
+        formData,
+      )
+      let res = response.data
+      console.log(res.answer)
+      if (res.status){
+        catalogRef.value.getCatalog()
+      } else{
+      }
+      console.log('POST 请求成功：', response.data)
+    } catch (error) {
+      console.error('POST 请求失败：', error)
+    }
+    visibleRenameFile.value = false
+  }
+
+  const visibleDeleteFile = ref(false)
+  const showDeleteFile = (id: number) => {
+    visibleDeleteFile.value = true
+    rightClickFileID.value = id
+  }
+  const deleteFile = async () => {
+    try {
+      const formData = new FormData()
+      formData.append('id', rightClickFileID.value.toString())
+      const response = await axios.post(
+        `/delete-file/`,
+        formData,
+      )
+      let res = response.data
+      console.log(res.answer)
+      if (res.status){
+        catalogRef.value.getCatalog()
+      } else{
+      }
+      console.log('POST 请求成功：', response.data)
+    } catch (error) {
+      console.error('POST 请求失败：', error)
+    }
+    visibleDeleteFile.value = false
   }
 
 </script>

@@ -56,6 +56,7 @@ urlpatterns = [
     path('update-file/', views.updateFile),
     path('create-file/', views.createNewFile),
     path('get-current-file/', views.getCurrentFile),
-
+    path('rename-file/', views.renameFile),
+    path('delete-file/', views.deleteFile),
 
 ]

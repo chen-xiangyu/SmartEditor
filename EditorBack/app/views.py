@@ -547,3 +547,32 @@ def getCurrentFile(request):
         }
         return JsonResponse(params)
     return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def renameFile(request):
+    if request.method == "POST":
+        file_id = request.POST.get("id")
+        new_filename = request.POST.get("filename")
+
+        current_file = models.File.objects.filter(id=file_id).first()
+        current_file.name = new_filename
+        current_file.save()
+
+        params = {
+            "status": True,
+            "message": "成功修改文件名",
+        }
+        return JsonResponse(params)
+    return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
+def deleteFile(request):
+    if request.method == "POST":
+        print(request.POST)
+
+        params = {
+            "status": True,
+            "message": "成功修改文件名",
+        }
+        return JsonResponse(params)
+    return JsonResponse({"status": False, "error": "请求方法错误"})
