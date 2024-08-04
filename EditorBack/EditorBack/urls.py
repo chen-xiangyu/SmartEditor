@@ -61,4 +61,6 @@ urlpatterns = [
 
     path('get-coins/', views.getCoins),
     path('recharge/', views.recharge),
+
+    path('smart-table/', views.smartTable),
 ]

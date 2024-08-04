@@ -474,6 +474,19 @@ def testReport(request):
         return JsonResponse({"status": False, "error": "请求方法错误"})
 
 @csrf_exempt
+def smartTable(request):
+    try:
+        if request.method == "POST":
+            prompt = """
+                请你根据下面的要求和数据，制作一个markdown形式的表格，并将表格用代码块进行包裹，代码块只能包含表格，
+                不能有其他内容，可以根据情况对表格的形式和内容进行适当的扩展：
+            """
+            response = utils.getAIResponse(request, prompt)
+            return JsonResponse({"status": True, "answer": utils.getTable(response.get_result())})
+    except Exception as e:
+        return JsonResponse({"status": False, "error": "请求方法错误"})
+
+@csrf_exempt
 def getCatalog(request):
     if request.method == "POST":
         account = request.META.get('HTTP_ACCOUNT')
@@ -502,7 +515,7 @@ def getCatalog(request):
 @csrf_exempt
 def updateFile(request):
     if request.method == "POST":
-        print(request.POST)
+        # print(request.POST)
         file_id = request.POST.get("id")
         content = request.POST.get("content")
 
@@ -611,7 +624,7 @@ def getCoins(request):
 def recharge(request):
     if request.method == "POST":
         account = request.META.get('HTTP_ACCOUNT')
-        print(request.POST)
+        # print(request.POST)
         amount = request.POST.get('amount')
         user = User.objects.get(account=account)
         user.coins += int(amount)

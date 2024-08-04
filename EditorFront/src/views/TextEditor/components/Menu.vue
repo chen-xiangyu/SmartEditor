@@ -421,14 +421,24 @@
         title: "撰写个人简历",
       }
     },
+    // {
+    //   icon: "microscope-line",
+    //   title: "撰写实验报告",
+    //   action: props.showTextInput,
+    //   params: {
+    //     url: "test-report",
+    //     prompt: "请您简要描述您的实验内容和结果，AI助手将会为您生成一份详细的实验报告",
+    //     title: "撰写实验报告",
+    //   }
+    // },
     {
-      icon: "microscope-line",
-      title: "撰写实验报告",
+      icon: "table-line",
+      title: "智能表格",
       action: props.showTextInput,
       params: {
-        url: "test-report",
-        prompt: "请您简要描述您的实验内容和结果，AI助手将会为您生成一份详细的实验报告",
-        title: "撰写实验报告",
+        url: "smart-table",
+        prompt: "请您简要描述您的需求和数据，AI助手将会为您生成一份详细的表格",
+        title: "智能表格",
       }
     },
     {

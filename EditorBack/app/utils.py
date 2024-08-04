@@ -157,6 +157,19 @@ def getJson(text):
     else:
         return ""
 
+def getTable(text):
+    # 正则表达式模式
+    pattern = r'`{3}(.*?)`{3}'
+    match = re.search(pattern, text, re.DOTALL)
+    if match:
+        # 提取匹配结果中的内容，去除注释
+        if match.group(1)[0] == 'm':
+            result = match.group(1)[8:]
+        result = re.sub(r'//.*$', '', result, flags=re.MULTILINE)
+        return result
+    else:
+        return ""
+
 # import fitz  # fitz就是pip install PyMuPDF
 # import os
 # import cv2
