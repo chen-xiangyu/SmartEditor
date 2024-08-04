@@ -350,6 +350,9 @@
       Image.configure({
         inline: true,
         allowBase64: true,
+        HTMLAttributes: {
+          style: 'width: 80%; height: auto; margin: 5px 10%;',
+        }
       }),
       Youtube.configure({
         inline: false,
