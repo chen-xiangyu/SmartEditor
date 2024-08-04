@@ -29,3 +29,6 @@ class File(models.Model):
         return self.name
     def get_file_path(self):
         return os.path.join(settings.MEDIA_ROOT, str(self.file))
+
+    def is_shared(self):
+        return self.shared_with.exists()

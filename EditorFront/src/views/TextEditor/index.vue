@@ -1,6 +1,6 @@
 <template>
   <el-container 
-    style="height: 100vh; width: 100vw; background-color: #FCF5E4;" 
+    style="height: 100vh; width: 100vw; background-color: #FAFAFA;" 
     ref="fileContRef" 
     @mousedown="notSee($event)" 
   >
@@ -159,16 +159,32 @@
       </template>
     </el-dialog>
 
+    <el-dialog v-model="visibleShareFile" title="共享文档" width="500">
+      <el-form :model="formShareFile">
+        <el-form-item label="共享用户:" label-width="80px">
+          <el-input v-model="formShareFile.shareFilename" autocomplete="off" />
+        </el-form-item>
+      </el-form>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="visibleShareFile = false">取消</el-button>
+          <el-button type="primary" @click="shareFile">
+            添加
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+
     <Loader v-if="visibleLoader"/>
 
     <el-header style="padding: 0; height: 60px;">
-      <el-menu mode="horizontal" :ellipsis="false" style="background-color: #FCF5E4;">
+      <el-menu mode="horizontal" :ellipsis="false" style="background-color: #D0E7EE;">
         <el-menu-item class="logo-item" style="background-color: inherit !important;">
           <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
         </el-menu-item>
         <div class="flex-grow" />
-        <el-menu-item style="background-color: inherit; padding: 0;">
-          <span @click="rechargeCoinsClick" style="cursor: pointer; color: #606266;" class="coin-item">
+        <el-menu-item style="background-color: inherit; padding: 0; border: 0;">
+          <span @click="rechargeCoinsClick" style="cursor: pointer; color: #606266; height: 100%" class="coin-item">
             硬币：{{ coins }}个，点击充值
           </span>
         </el-menu-item>
@@ -236,13 +252,14 @@
     <el-container style="width: 100vw;">
 
       <el-scrollbar style="height: calc(100vh - 60px); width: 18%;">
-        <el-aside style="height: calc(100vh - 60px); background-color: #E4DCC8; width: 100%;">
+        <el-aside style="height: calc(100vh - 60px); background-color: #F3F5F7; width: 100%;">
           <Catalog
             ref="catalogRef"
             :setCurrentContent="setCurrentContent" 
             :showNewFile="showNewFile"
             :showRenameFile = "showRenameFile"
             :showDeleteFile = "showDeleteFile"
+            :showShareFile="showShareFile"
           />
         </el-aside>
       </el-scrollbar>
@@ -260,7 +277,7 @@
         </el-header>
 
         <el-scrollbar style="height: calc(100vh - 60px - 4rem);">
-          <el-main style="background-color: #FCF5E4;">
+          <el-main style="background-color: #FAFAFA;">
             <editor-content 
               class="editor-content"
               :editor="editor"
@@ -274,7 +291,7 @@
       </el-container>
 
       <el-scrollbar style="height: calc(100vh - 60px); width: 18%;">
-        <el-aside style="height: calc(100vh - 60px); background-color: #E4DCC8; width: 100%;">
+        <el-aside style="height: calc(100vh - 60px); background-color: #F3F5F7; width: 100%;">
           <Outline/>
         </el-aside>
       </el-scrollbar>
@@ -1078,6 +1095,39 @@
       console.error('POST 请求失败：', error)
     }
     visibleDeleteFile.value = false
+  }
+
+  const visibleShareFile = ref(false)
+  const formShareFile = ref({
+    shareFilename: ''
+  })
+  const showShareFile = (id: number) => {
+    visibleShareFile.value = true
+    rightClickFileID.value = id
+  }
+  const shareFile = async () => {
+    try {
+      const formData = new FormData()
+      formData.append('id', rightClickFileID.value.toString())
+      formData.append('share-user', formShareFile.value.shareFilename)
+      const response = await axios.post(
+        `/share-file/`,
+        formData,
+      )
+      let res = response.data
+      console.log(res.answer)
+      if (res.status){
+        catalogRef.value.getCatalog()
+        ElMessage.success("成功与用户" + formShareFile.value.shareFilename + "共享文档")
+        formShareFile.value.shareFilename = ""
+      } else{
+        ElMessage.error(res.error)
+      }
+      console.log('POST 请求成功：', response.data)
+    } catch (error) {
+      console.error('POST 请求失败：', error)
+    }
+    visibleShareFile.value = false
   }
 </script>
 

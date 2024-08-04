@@ -63,4 +63,5 @@ urlpatterns = [
     path('recharge/', views.recharge),
 
     path('smart-table/', views.smartTable),
+    path('share-file/', views.shareFile),
 ]

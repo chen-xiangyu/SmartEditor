@@ -103,9 +103,9 @@
   }
   h2 {
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-family: 'KaiTi', sans-serif;
   }
 
@@ -125,7 +125,7 @@
   }
 
   .outline::-webkit-scrollbar-track {
-    background-color: #E4DCC8; /* 滚动条轨道的颜色 */
+    background-color: #F3F5F7; /* 滚动条轨道的颜色 */
     border-radius: 10px;
   }
 </style>

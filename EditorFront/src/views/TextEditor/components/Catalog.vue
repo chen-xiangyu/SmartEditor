@@ -24,14 +24,44 @@
         class="catalog__item" 
         :fid="filename.id"
       >
-        <el-button
-          text
-          :class="{'catalog__button': true, 'catalog__button--active': filename.id === currentFileID}"
-          @contextmenu.prevent="showDropdown($event, filename.id)"
-          @click="getCurrentFile(filename.id)"
+        <el-tooltip        
+          class="box-item"
+          effect="dark"
+          placement="right"
+          hide-after="10"
         >
-          {{ filename.name }}
-        </el-button>
+          <template #content>
+            最后修改于 {{ filename.last_modified }}<br /> 
+            创建于 {{ filename.created_time }} <br />
+            <template v-if="filename.is_shared">
+              正在与：
+              {{ filename.shared_with.slice(0, 3).join(', ') }}
+              <span v-if="filename.shared_with.length > 3">...</span>
+              共享
+            </template>
+          </template>
+          <el-button
+            text
+            :class="{'catalog__button': true, 'catalog__button--active': filename.id === currentFileID}"
+            @contextmenu.prevent="showDropdown($event, filename.id)"
+            @click="getCurrentFile(filename.id)"
+          >
+            {{ filename.name }}
+            <template v-if="filename.is_shared">
+              <svg class="remix share-icon">
+                <use :xlink:href="`${remixiconUrl}#ri-team-line`" />
+              </svg>
+            </template>
+            <!-- <div class="button-content">
+              <span>{{ filename.name }}</span>
+              <template v-if="filename.is_shared">
+                <svg class="remix share-icon">
+                  <use :xlink:href="`${remixiconUrl}#ri-team-line`" />
+                </svg>
+              </template>
+            </div> -->
+          </el-button>
+        </el-tooltip>
       </li>
     </ul>
 
@@ -52,7 +82,7 @@
       <div class="item" @mousedown="props.showDeleteFile(rightClickFileID)">
         <span class="item-text">删除</span>
       </div>
-      <div class="item" @mousedown="props.showRenameFile('ss')">
+      <div class="item" @mousedown="props.showShareFile(rightClickFileID)">
         <span class="item-text">共享</span>
       </div>
       <!-- <div v-for="(value, key) in dropdownList" :key="key" class="item" @mousedown="value.action()">
@@ -72,6 +102,7 @@
     showNewFile: Function,
     showRenameFile: Function,
     showDeleteFile: Function,
+    showShareFile: Function,
   }>()
 
   const filenameList = ref([])
@@ -92,6 +123,7 @@
       console.log("catalog on mounted")
       const response = await axios.post(`/get-catalog/`)
       let res = response.data
+      console.log(res)
       if (res.status) {
         filenameList.value = res.filenameList
         currentFile.value = res.currentFile
@@ -183,20 +215,31 @@
       width: 100%;
       white-space: normal;
       text-align: left;
+      position: relative;
       &:hover {
         opacity: 0.5;
         background-color: #0ff;
       }
+
+      .share-icon {
+      width: 1rem;
+      height: 1rem;
+      fill: #1f78b4;
+      position: fixed; /* 设置图标为固定定位 */
+      left: 15%; /* 设置图标靠右对齐 */
+    }
     }
     .catalog__button--active {
       background-color: #cccccc;
     }
+
+
   }
   h2 {
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-family: 'KaiTi', sans-serif;
   }
 
@@ -216,7 +259,7 @@
   }
 
   .catalog::-webkit-scrollbar-track {
-    background-color: #E4DCC8;
+    background-color: #F3F5F7;
     border-radius: 10px;
   }
 

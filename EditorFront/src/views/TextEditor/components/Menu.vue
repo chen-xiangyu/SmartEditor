@@ -537,7 +537,7 @@
 
 <style lang="scss" scoped>
   .menu {
-    background-color: #E9E3D3;
+    background-color: #E8E8E8;
     border-bottom: 1px solid #E6E6E6;
   }
   .title {

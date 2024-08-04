@@ -492,11 +492,32 @@ def getCatalog(request):
         account = request.META.get('HTTP_ACCOUNT')
         user = User.objects.get(account=account)
 
-        files = models.File.objects.filter(creator=user)
-        filename_list = [{"id": file.id, "name": file.name} for file in files]
+        created_files = models.File.objects.filter(creator=user)
+        shared_files = models.File.objects.filter(shared_with=user)
+        all_files = created_files | shared_files
 
-        if files.exists():
-            latest_file = files.order_by('-created_time').first()
+        processed_file_ids = set()
+        filename_list = []
+        for file in all_files:
+            if file.id in processed_file_ids:
+                continue
+
+            file_info = {
+                "id": file.id,
+                "name": file.name,
+                "created_time": file.created_time.strftime('%Y-%m-%d %H:%M'),
+                "last_modified": file.last_modified.strftime('%Y-%m-%d %H:%M'),
+                "is_shared": file.is_shared(),
+                "shared_with": [shared_user.account for shared_user in file.shared_with.all() if
+                                shared_user.account != account]
+            }
+            filename_list.append(file_info)
+            processed_file_ids.add(file.id)
+
+        # filename_list = [{"id": file.id, "name": file.name, "is_shared": file.is_shared()} for file in all_files]
+
+        if all_files.exists():
+            latest_file = all_files.order_by('-created_time').first()
             current_file_content = latest_file.file.read().decode('utf-8')  # 读取文件内容并解码为字符串
             current_file_id = latest_file.id
         else:
@@ -637,3 +658,27 @@ def recharge(request):
         }
         return JsonResponse(params)
     return JsonResponse({"status": False, "etype": 0, "error": "请求方法错误"})
+
+@csrf_exempt
+def shareFile(request):
+    if request.method == "POST":
+        current_account = request.META.get('HTTP_ACCOUNT')
+        file_id = request.POST.get("id")
+        shared_account = request.POST.get("share-user")
+
+        if not User.objects.filter(account=shared_account).exists():
+            return JsonResponse({"status": False, "error": "用户不存在"})
+
+        shared_user = User.objects.filter(account=shared_account).first()
+        share_file = models.File.objects.filter(id=file_id).first()
+        if current_account == shared_account or share_file.shared_with.filter(id=shared_user.id).exists():
+            return JsonResponse({"status": False, "error": "用户已经在该文档中"})
+        share_file.shared_with.add(shared_user)
+        share_file.save()
+
+        params = {
+            "status": True,
+            "message": "成功共享文件",
+        }
+        return JsonResponse(params)
+    return JsonResponse({"status": False, "error": "请求方法错误"})
