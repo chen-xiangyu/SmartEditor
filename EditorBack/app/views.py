@@ -38,7 +38,7 @@ def signUp(request):
             return JsonResponse({"status": False, 'etype': 1, "error": "账号已存在"})
 
         hashed_password = make_password(password)
-        user = User(name="user" + account, account=account, password=hashed_password)
+        user = User(name="user" + account, account=account, password=hashed_password, coins=20)
         user.save()
 
         empty_file = ContentFile("".encode('utf-8'))
@@ -228,6 +228,10 @@ def useOCR(request):
     try:
         if request.method == "POST":
             file_path = utils.saveFile(request)
+            account = request.META.get('HTTP_ACCOUNT')
+            user = User.objects.get(account=account)
+            user.coins -= 1
+            user.save()
             return JsonResponse({"status": True, "answer": utils.handleOCR(file_path)})
             # return JsonResponse({"status": True, "answer": "ok"})
     except Exception as e:
@@ -242,6 +246,10 @@ def voiceRecognise(request):
             audio = AudioSegment.from_file(file_path)
             if len(audio) > 40000:
                 return JsonResponse({"status": False, "error": "请求方法错误"})
+            account = request.META.get('HTTP_ACCOUNT')
+            user = User.objects.get(account=account)
+            user.coins -= 1
+            user.save()
             return JsonResponse({"status": True, "answer": utils.handleVoice(file_path)})
     except Exception as e:
         return JsonResponse({"status": False, "error": "请求方法错误"})
@@ -255,6 +263,10 @@ def videoRecognise(request):
             audio = video.audio
             if audio.duration > 40:
                 return JsonResponse({"status": False, "error": "请求方法错误"})
+            account = request.META.get('HTTP_ACCOUNT')
+            user = User.objects.get(account=account)
+            user.coins -= 1
+            user.save()
             return JsonResponse({"status": True, "answer": utils.handleVidio(file_path)})
     except Exception as e:
         return JsonResponse({"status": False, "error": "请求方法错误"})

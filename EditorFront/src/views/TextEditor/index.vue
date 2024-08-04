@@ -92,6 +92,8 @@
         :getVoiceResult="getVoiceResult" 
         :showLoader="showLoader"
         :closeLoader="closeLoader"
+        :coins="coins"
+        :fetchCoins="fetchCoins"
       >
       </VoiceInput>
     </el-dialog>
@@ -377,7 +379,10 @@
       editorStore.setEditorInstance(editor)
     },
   });
-
+  onMounted(() => {
+    fetchCoins()
+  })
+  
 
   // 监听粘贴事件
   const handlePaste = (event: ClipboardEvent) => {
@@ -406,6 +411,10 @@
     'analysis': {name: "分析内容", icon: "bar-chart-fill"},
   })
   async function getAIMeaage(name: string){
+    if (coins.value == 0) {
+      ElMessage.error('硬币数量为0，无法使用AI功能，请尽快充值.')
+      return 
+    }
     try {
       console.log("on mounted")
       const formData = new FormData()
@@ -422,6 +431,7 @@
         cardMsg.value = res.answer
         isMultiMedia.value = false
         visibleCard.value = true
+        fetchCoins()
       } else{
         ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)
@@ -445,7 +455,7 @@
         console.error('获取硬币数量失败：', error)
       })
   }
-  const coins = ref(fetchCoins())
+  const coins = ref(null)
   const rechargeDialogVisible = ref(false)
   const selectedAmount = ref('10')
   const selectedPaymentMethod = ref('wechat')
@@ -688,6 +698,10 @@
     uploadUrl.value = params.url
   }
   const beforeUpload = async (file: any) => {
+    if (coins.value == 0) {
+      ElMessage.error('硬币数量为0，无法使用AI功能，请尽快充值.')
+      return 
+    }
     ElMessage({
       message: '成功上传文件',
       type: 'success',
@@ -710,6 +724,7 @@
         cardMsg.value = res.answer
         isMultiMedia.value = true
         visibleCard.value = true
+        fetchCoins()
       } else{
         ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)
@@ -778,6 +793,10 @@
       })
       return ;
     }
+    if (coins.value == 0) {
+      ElMessage.error('硬币数量为0，无法使用AI功能，请尽快充值.')
+      return 
+    }
     visibleTextInput.value = false
     ElMessage({
       message: '成功发送',
@@ -806,6 +825,7 @@
         } else {
           handleAIDocument(res.answer)
         }
+        fetchCoins()
       } else{
         ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)
@@ -886,6 +906,10 @@
 
   // 自动排版
   const autoTypography = async (params: any) => {
+    if (coins.value == 0) {
+      ElMessage.error('硬币数量为0，无法使用AI功能，请尽快充值.')
+      return 
+    }
     try {
       console.log("on mounted")
       const formData = new FormData()
@@ -900,6 +924,8 @@
       if (res.status){
         editor.value?.commands.setContent(res.answer)
         loadHeadings()
+        fetchCoins()
+        isUpdate.value = true
       } else{
         ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)

@@ -45,6 +45,8 @@
     getVoiceResult: Function;
     showLoader: Function;
     closeLoader: Function;
+    coins: number,
+    fetchCoins: Function,
   }>()
   const recwave = ref(null)
   let rec = null
@@ -98,6 +100,10 @@
       console.error('未打开录音')
       return
     }
+    if (props.coins == 0) {
+      ElMessage.error('硬币数量为0，无法使用AI功能，请尽快充值.')
+      return 
+    }
     rec.stop(
       (blob, duration) => {
         // recBlob = blob
@@ -138,6 +144,7 @@
         // isMultiMedia.value = true
         // visibleCard.value = true
         props.getVoiceResult(res.answer)
+        props.fetchCoins()
       } else{
         ElMessage.error('非常抱歉，AI的回复在来的路上丢失了，请重新操作')
         console.log(res.error)

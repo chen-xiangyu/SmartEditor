@@ -14,6 +14,7 @@ from moviepy.editor import VideoFileClip
 import json
 import erniebot
 from app.models import User
+from app import models
 import re
 
 HEADER = {'typ': 'JWP', 'alg': 'default'}
@@ -122,6 +123,8 @@ def getAIResponse(request, prompt):
     access_token = user.accessToken
     if access_token == None:
         access_token = "b3d27cfee042938a09a088dfd302180c3467118f"
+        user.coins -= 1
+        user.save()
     # print(access_token)
     erniebot.api_type = 'aistudio'
     erniebot.access_token =access_token
