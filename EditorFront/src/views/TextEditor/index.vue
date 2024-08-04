@@ -202,13 +202,6 @@
               <div>{{ option.price }}</div>
               <div v-if="selectedAmount === option.value" class="checkmark">✔</div>
             </div>
-            <div :class="['amount-option', { selected: selectedAmount === 'custom' }]" @click="selectAmount('custom')">
-              <div>其他金额</div>
-              <div>
-                <el-input v-if="selectedAmount === 'custom'" v-model="rechargeAmount" placeholder="请输入充值金额" style="width: auto;height:20px;"></el-input>
-              </div>
-              <div v-if="selectedAmount === 'custom'" class="checkmark">✔</div>
-            </div>
           </div>
           <div class="section-title">付款方式</div>
           <div class="payment-methods">
@@ -221,6 +214,19 @@
         <div slot="footer" class="dialog-footer">
           <el-button @click="rechargeDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="rechargeCoins">确 定</el-button>
+        </div>
+      </el-dialog>
+
+      <el-dialog v-model="paymentDialogVisible" width="30%">
+        <template #title>
+          <span class="custom-dialog-title">支付</span>
+        </template>
+        <div class="payment-QR-code">
+          <img src="@/assets/images/qr-code.png" alt="支付二维码">
+        </div>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="paymentDialogVisible = false">取 消 支 付</el-button>
+          <el-button type="primary" @click="confirmPayment">确 认 支 付</el-button>
         </div>
       </el-dialog>
     </el-header>
@@ -441,13 +447,14 @@
   }
   const coins = ref(fetchCoins())
   const rechargeDialogVisible = ref(false)
-  const rechargeAmount = ref(0)
   const selectedAmount = ref('10')
   const selectedPaymentMethod = ref('wechat')
+  const paymentDialogVisible = ref(false)
 
   // 充值金额选项
   const amountOptions = [
     { label: '10硬币', price: '¥10', value: '10' },
+    { label: '30硬币', price: '¥30', value: '30' },
     { label: '50硬币', price: '¥50', value: '50' },
     { label: '100硬币', price: '¥100', value: '100' },
   ]
@@ -472,11 +479,16 @@
     rechargeDialogVisible.value = true
   }
   const rechargeCoins = async () => {
-    let amount=selectedAmount.value==='custom'?rechargeAmount.value:parseInt(selectedAmount.value)
+    let amount=parseInt(selectedAmount.value)
     if (amount <= 0) {
       ElMessage.error('充值金额必须大于0')
       return
     }
+    rechargeDialogVisible.value = false
+    paymentDialogVisible.value = true
+  }
+  const confirmPayment = async () => {
+    let amount = parseInt(selectedAmount.value)
     try {
       const formData = new FormData()
       formData.append('amount', amount.toString())
@@ -492,8 +504,7 @@
     } catch (error) {
       console.error('POST 请求失败：', error)
     }
-    rechargeDialogVisible.value = false
-    return false;
+    paymentDialogVisible.value = false
   }
 
   const fileContRef = ref(null)
@@ -1215,6 +1226,19 @@
     right: 5px;
     color: #409EFF;
   }
+
+  .payment-QR-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+  }
+
+  .payment-QR-code img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
   .coin-item {
     padding: 0 20px;
   }
