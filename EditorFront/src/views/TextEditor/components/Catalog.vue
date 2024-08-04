@@ -2,19 +2,47 @@
   <div class="catalog">
     <h2 class="text-gray-400">我的文档</h2>
     <div class="button-container">
-      <el-tooltip
-        class="box-item"
-        effect="dark"
-        :content="'新建文档'"
-        placement="top"
-        hide-after="10"
-      >
-        <button class="menu-item" @click="props.showNewFile()">
-          <svg class="remix">
-            <use :xlink:href="`${remixiconUrl}#ri-sticky-note-add-line`" />
-          </svg>
-        </button>
-      </el-tooltip>
+      <div>
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          :content="'新建文档'"
+          placement="top"
+          hide-after="10"
+        >
+          <button class="menu-item" @click="props.showNewFile()">
+            <svg class="remix">
+              <use :xlink:href="`${remixiconUrl}#ri-sticky-note-add-line`" />
+            </svg>
+          </button>
+        </el-tooltip>
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          :content="'排序'"
+          placement="top"
+          hide-after="10"
+        >
+          <button class="menu-item" @click="toggleSortOrder()">
+            <svg class="remix">
+              <use :xlink:href="`${remixiconUrl}#ri-sort-desc`" />
+            </svg>
+          </button>
+        </el-tooltip>
+        <el-tooltip
+          class="box-item"
+          effect="dark"
+          :content="'搜索'"
+          placement="top"
+          hide-after="10"
+        >
+          <button class="menu-item">
+            <svg class="remix">
+              <use :xlink:href="`${remixiconUrl}#ri-search-line`" />
+            </svg>
+          </button>
+        </el-tooltip>
+      </div>
     </div>
 
     <ul class="catalog__list">
@@ -106,6 +134,7 @@
   }>()
 
   const filenameList = ref([])
+  const isAscending = ref(true)
   const currentFile = ref("")
   const currentFileID = ref(0)
   const rightClickFileID = ref(0)
@@ -126,6 +155,7 @@
       console.log(res)
       if (res.status) {
         filenameList.value = res.filenameList
+        sortFilenameList()
         currentFile.value = res.currentFile
         currentFileID.value = res.currentFileID
         props.setCurrentContent(res.currentFile, res.currentFileID)
@@ -180,9 +210,28 @@
     visibleDropdown.value = false
   }
 
+  const checkIfFileIsShared = (id: number) => {
+    console.log("come check")
+    const file = filenameList.value.find(file => file.id === id)
+    return file ? file.is_shared : false
+  }
+
+  const sortFilenameList = () => {
+    filenameList.value = filenameList.value.slice().sort((a, b) => {
+      return isAscending.value ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+    });
+  };
+
+  const toggleSortOrder = () => {
+    isAscending.value = !isAscending.value;
+    sortFilenameList();
+  };
+
   defineExpose({
     getCatalog,
     closeDropdown,
+    checkIfFileIsShared,
+    getCurrentFile,
   })
 </script>
 
@@ -217,23 +266,22 @@
       text-align: left;
       position: relative;
       &:hover {
-        opacity: 0.5;
-        background-color: #0ff;
+        // opacity: 0.1;
+        background-color: #D9D9D9 !important;
+        // background: #0ff;
       }
 
       .share-icon {
       width: 1rem;
       height: 1rem;
-      fill: #1f78b4;
+      fill: #1592FF;
       position: fixed; /* 设置图标为固定定位 */
       left: 15%; /* 设置图标靠右对齐 */
     }
     }
     .catalog__button--active {
-      background-color: #cccccc;
+      background-color: #D9D9D9;
     }
-
-
   }
   h2 {
     margin-top: 10px;
@@ -248,18 +296,18 @@
   }
 
   .catalog::-webkit-scrollbar-thumb {
-    background-color: #888;
+    background-color: #D2D2D3;
     border-radius: 10px;
     border: 2px solid transparent;
     background-clip: content-box;
   }
 
   .catalog::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
+    background-color: #BBBBBC;
   }
 
   .catalog::-webkit-scrollbar-track {
-    background-color: #F3F5F7;
+    background-color: #EAEAEB;
     border-radius: 10px;
   }
 
@@ -276,7 +324,7 @@
     cursor: pointer;
     height: 1.6rem;
     padding: 0.12rem;
-    margin: 0 auto;
+    margin: 0 5px;
     width: 1.6rem;
 
     svg {
@@ -292,38 +340,40 @@
   }
 
   .context-dropdown {
-    width: 110px; /* 调整宽度以适应一列布局 */
+    width: 90px; /* 调整宽度以适应一列布局 */
     margin: 0;
-    background: #EAEAEB;
+    background-color: #F3F5F7;
     z-index: 1200;
     position: absolute;
     list-style-type: none;
-    padding: 5px; /* 调整填充 */
+    padding: 0px; /* 调整填充 */
     border-radius: 6px; /* 增加圆角 */
+    border: 1px solid #D4D4D4;
     font-size: 16px;
     font-weight: 400;
     color: #333;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 优化阴影 */
     display: grid;
     grid-template-columns: 1fr; /* 一列布局 */
-    gap: 10px; /* 增加项之间的间距 */
+    gap: 0px; /* 增加项之间的间距 */
   }
 
   .context-dropdown .item {
     height: 35px; /* 增加高度 */
     display: flex; /* 使用弹性布局 */
     align-items: center; /* 垂直居中 */
-    padding: 0 10px; /* 增加内边距 */
+    padding: 0; /* 增加内边距 */
+    margin: 0;
     color: #D9D9D9;
     cursor: pointer;
-    border-radius: 4px; /* 增加圆角 */
-    background-color: #f9f9f9; /* 添加背景色 */
+    border-radius: 5px; /* 增加圆角 */
+    background-color: #EAEAEB; /* 添加背景色 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
   }
 
   .context-dropdown .item-text {
     flex: 1; /* 占据剩余空间，使文本左对齐 */
-    text-align: left; /* 确保文本左对齐 */
+    text-align: center; /* 确保文本左对齐 */
     font-size: 0.9rem;
     color: #333;
   }

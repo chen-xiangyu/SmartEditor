@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <el-menu mode="horizontal" :ellipsis="false" style="background-color: #FCF5E4;" class="menu">
+    <el-menu mode="horizontal" :ellipsis="false" style="background-color: #E3E3E3;" class="menu">
       <!-- <div class="flex-grow" /> -->
       <el-menu-item @click="gotoEditor()">
         <svg class="remix">
@@ -205,7 +205,7 @@
   .page-container {
     width: 100vw;
     height: 100vh;
-    background-color: #E9E3D3;
+    background-color: #FAFAFA;
   }
   .account-container {
     padding-top: 5%;

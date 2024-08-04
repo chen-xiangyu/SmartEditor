@@ -178,7 +178,9 @@
     <Loader v-if="visibleLoader"/>
 
     <el-header style="padding: 0; height: 60px;">
-      <el-menu mode="horizontal" :ellipsis="false" style="background-color: #D0E7EE;">
+      <!-- <el-menu mode="horizontal" :ellipsis="false" style="background-color: #D0E7EE;"> -->
+      <el-menu mode="horizontal" :ellipsis="false" style="background-color: #E3E3E3;">
+
         <el-menu-item class="logo-item" style="background-color: inherit !important;">
           <img src="@/assets/images/logo.png" alt="Logo" class="logo" />
         </el-menu-item>
@@ -188,7 +190,7 @@
             硬币：{{ coins }}个，点击充值
           </span>
         </el-menu-item>
-        <el-menu-item>
+        <el-menu-item style="background-color: inherit; padding: 0; border: 0;" class="hello-dropdown">
           <el-dropdown>
             <template #default>
             <span class="el-dropdown-link">
@@ -252,7 +254,7 @@
     <el-container style="width: 100vw;">
 
       <el-scrollbar style="height: calc(100vh - 60px); width: 18%;">
-        <el-aside style="height: calc(100vh - 60px); background-color: #F3F5F7; width: 100%;">
+        <el-aside style="height: calc(100vh - 60px); background-color: #EAEAEB; width: 100%;">
           <Catalog
             ref="catalogRef"
             :setCurrentContent="setCurrentContent" 
@@ -291,7 +293,7 @@
       </el-container>
 
       <el-scrollbar style="height: calc(100vh - 60px); width: 18%;">
-        <el-aside style="height: calc(100vh - 60px); background-color: #F3F5F7; width: 100%;">
+        <el-aside style="height: calc(100vh - 60px); background-color: #EAEAEB; width: 100%;">
           <Outline/>
         </el-aside>
       </el-scrollbar>
@@ -973,6 +975,7 @@
   const isUpdate = ref(false)
   const setCurrentContent = (content: string, id: number) => {
     editor.value?.commands.setContent(content)
+    loadHeadings()
     currentFileID.value = id
   }
 
@@ -1129,6 +1132,16 @@
     }
     visibleShareFile.value = false
   }
+
+  // 下面是简单的多人同步的实现
+  let syncInterval = setInterval(async ()  => {
+    console.log("first")
+    if (catalogRef.value.checkIfFileIsShared(currentFileID.value) && !isUpdate.value) {
+      catalogRef.value.getCurrentFile(currentFileID.value)
+      catalogRef.value.getCatalog()
+    }
+  }, 1000);
+
 </script>
 
 <style lang="scss" scoped>
@@ -1206,24 +1219,30 @@
     cursor: pointer;
     display: flex;
     align-items: center;
+    padding: 0 20px;
+  }
+  .hello-dropdown:hover {
+    background-color: #CBCBCC !important;
+
   }
 
   .context-menu {
     width: 220px; /* 调整宽度以适应两列布局 */
     margin: 0;
-    background: #EAEAEB;
+    background-color: #F3F5F7;
     z-index: 1000;
     position: absolute;
     list-style-type: none;
-    padding: 5px; /* 调整填充 */
+    padding: 0px; /* 调整填充 */
     border-radius: 6px; /* 增加圆角 */
+    border: 1px solid #D4D4D4;
     font-size: 16px;
     font-weight: 400;
     color: #333;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 优化阴影 */
     display: grid;
     grid-template-columns: 1fr 1fr; /* 两列布局 */
-    gap: 10px; /* 增加项之间的间距 */
+    gap: 0px; /* 增加项之间的间距 */
   }
 
   .context-menu .item {
@@ -1234,7 +1253,7 @@
     color: #D9D9D9;
     cursor: pointer;
     border-radius: 4px; /* 增加圆角 */
-    background-color: #f9f9f9; /* 添加背景色 */
+    background-color: #EAEAEB; /* 添加背景色 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影 */
   }
 
@@ -1322,7 +1341,7 @@
     padding: 0 20px;
   }
   .coin-item:hover {
-    background-color: #ECF5FF;
+    background-color: #CBCBCC;
   }
 </style>
 

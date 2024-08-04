@@ -494,13 +494,15 @@ def getCatalog(request):
 
         created_files = models.File.objects.filter(creator=user)
         shared_files = models.File.objects.filter(shared_with=user)
-        all_files = created_files | shared_files
+        all_files = (created_files | shared_files).distinct()
 
-        processed_file_ids = set()
+        # processed_file_ids = set()
         filename_list = []
         for file in all_files:
-            if file.id in processed_file_ids:
-                continue
+            shared_with_accounts = {shared_user.account for shared_user in file.shared_with.all()}
+            if file.creator.account != account:
+                shared_with_accounts.add(file.creator.account)
+            shared_with_accounts.discard(account)
 
             file_info = {
                 "id": file.id,
@@ -508,11 +510,9 @@ def getCatalog(request):
                 "created_time": file.created_time.strftime('%Y-%m-%d %H:%M'),
                 "last_modified": file.last_modified.strftime('%Y-%m-%d %H:%M'),
                 "is_shared": file.is_shared(),
-                "shared_with": [shared_user.account for shared_user in file.shared_with.all() if
-                                shared_user.account != account]
+                "shared_with": list(shared_with_accounts)
             }
             filename_list.append(file_info)
-            processed_file_ids.add(file.id)
 
         # filename_list = [{"id": file.id, "name": file.name, "is_shared": file.is_shared()} for file in all_files]
 

@@ -114,18 +114,18 @@
   }
 
   .outline::-webkit-scrollbar-thumb {
-    background-color: #888; /* 滚动条的颜色 */
+    background-color: #D2D2D3; /* 滚动条的颜色 */
     border-radius: 10px;
     border: 2px solid transparent;
     background-clip: content-box; /* 修正滚动条颜色的边距 */
   }
 
   .outline::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* 滚动条悬停时的颜色 */
+    background-color: #BBBBBC; /* 滚动条悬停时的颜色 */
   }
 
   .outline::-webkit-scrollbar-track {
-    background-color: #F3F5F7; /* 滚动条轨道的颜色 */
+    background-color: #EAEAEB; /* 滚动条轨道的颜色 */
     border-radius: 10px;
   }
 </style>
