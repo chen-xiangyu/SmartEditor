@@ -377,8 +377,11 @@
         inline: false,
         controls: true,
         nocookie: true,
-        width: 480,
-        height: 320,
+        // width: 1024,
+        // height: 576,
+        HTMLAttributes: {
+          style: 'margin: 5px 10%;',
+        }
       }),
       Markdown,
       Table.configure({
@@ -1439,7 +1442,7 @@ b {
     border-collapse: collapse;
     table-layout: fixed;
     width: 80%;
-    margin: 0;
+    margin: 0 auto;
     overflow: hidden;
 
     td,
