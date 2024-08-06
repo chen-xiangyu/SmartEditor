@@ -304,7 +304,7 @@
 </template>
 
 <script setup lang="ts" name="TextEditor">
-  import { ref, reactive, computed, onMounted, onBeforeUnmount } from "vue"
+  import { ref, reactive, computed, onMounted, onUnmounted} from "vue"
   import { useEditor, EditorContent, Editor } from "@tiptap/vue-3"
   import StarterKit from '@tiptap/starter-kit'
   import Highlight from '@tiptap/extension-highlight'
@@ -346,7 +346,7 @@
   const router = useRouter()
   const editorStore = useEditorStore()
 // 编辑器
-  const savedContent = localStorage.getItem('editorContent');
+  // const savedContent = localStorage.getItem('editorContent');
   const editor = useEditor({
     // content: "我正在使用 Vue.js 运行 Tiptap。",
     // content: `` || savedContent,
@@ -981,9 +981,12 @@
     loadHeadings()
     currentFileID.value = id
   }
-
-  // let saveInterval = null
-  let saveInterval = setInterval(async ()  => {
+  onUnmounted(() => {
+    clearInterval(saveInterval)
+    clearInterval(syncInterval)
+  })
+  let saveInterval = null
+  saveInterval = setInterval(async ()  => {
     if (isUpdate.value) {
       const content = editor.value?.getHTML()
       try {
@@ -1136,8 +1139,9 @@
     visibleShareFile.value = false
   }
 
-  // 下面是简单的多人同步的实现
-  let syncInterval = setInterval(async ()  => {
+// 下面是简单的多人同步的实现
+  let syncInterval = null;
+  syncInterval = setInterval(async ()  => {
     console.log("first")
     if (catalogRef.value.checkIfFileIsShared(currentFileID.value) && !isUpdate.value) {
       catalogRef.value.getCurrentFile(currentFileID.value)

@@ -1,18 +1,18 @@
-2024-08-05 22:58:41.975 | DEBUG    | paddlespeech.s2t:<module>:41 - register user softmax to paddle, remove this when fixed!
-2024-08-05 22:58:41.976 | DEBUG    | paddlespeech.s2t:<module>:45 - register user log_softmax to paddle, remove this when fixed!
-2024-08-05 22:58:41.976 | DEBUG    | paddlespeech.s2t:<module>:49 - register user sigmoid to paddle, remove this when fixed!
-2024-08-05 22:58:41.976 | DEBUG    | paddlespeech.s2t:<module>:53 - register user log_sigmoid to paddle, remove this when fixed!
-2024-08-05 22:58:41.976 | DEBUG    | paddlespeech.s2t:<module>:57 - register user relu to paddle, remove this when fixed!
-2024-08-05 22:58:41.976 | DEBUG    | paddlespeech.s2t:<module>:66 - override cat of paddle if exists or register, remove this when fixed!
-2024-08-05 22:58:41.977 | DEBUG    | paddlespeech.s2t:<module>:88 - override long of paddle.Tensor if exists or register, remove this when fixed!
-2024-08-05 22:58:41.977 | DEBUG    | paddlespeech.s2t:<module>:110 - override new_full of paddle.Tensor if exists or register, remove this when fixed!
-2024-08-05 22:58:41.978 | DEBUG    | paddlespeech.s2t:<module>:228 - register user repeat to paddle.Tensor, remove this when fixed!
-2024-08-05 22:58:41.978 | DEBUG    | paddlespeech.s2t:<module>:234 - register user softmax to paddle.Tensor, remove this when fixed!
-2024-08-05 22:58:41.978 | DEBUG    | paddlespeech.s2t:<module>:244 - register user relu to paddle.Tensor, remove this when fixed!
-2024-08-05 22:58:41.978 | DEBUG    | paddlespeech.s2t:<module>:253 - register user type_as to paddle.Tensor, remove this when fixed!
-2024-08-05 22:58:41.979 | DEBUG    | paddlespeech.s2t:<module>:280 - register user float to paddle.Tensor, remove this when fixed!
-2024-08-05 22:58:41.979 | DEBUG    | paddlespeech.s2t:<module>:291 - register user int to paddle.Tensor, remove this when fixed!
-2024-08-05 23:48:47.172 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:222 - Vocab: ['<blank>',
+2024-08-06 10:00:36.427 | DEBUG    | paddlespeech.s2t:<module>:41 - register user softmax to paddle, remove this when fixed!
+2024-08-06 10:00:36.428 | DEBUG    | paddlespeech.s2t:<module>:45 - register user log_softmax to paddle, remove this when fixed!
+2024-08-06 10:00:36.428 | DEBUG    | paddlespeech.s2t:<module>:49 - register user sigmoid to paddle, remove this when fixed!
+2024-08-06 10:00:36.429 | DEBUG    | paddlespeech.s2t:<module>:53 - register user log_sigmoid to paddle, remove this when fixed!
+2024-08-06 10:00:36.429 | DEBUG    | paddlespeech.s2t:<module>:57 - register user relu to paddle, remove this when fixed!
+2024-08-06 10:00:36.429 | DEBUG    | paddlespeech.s2t:<module>:66 - override cat of paddle if exists or register, remove this when fixed!
+2024-08-06 10:00:36.429 | DEBUG    | paddlespeech.s2t:<module>:88 - override long of paddle.Tensor if exists or register, remove this when fixed!
+2024-08-06 10:00:36.429 | DEBUG    | paddlespeech.s2t:<module>:110 - override new_full of paddle.Tensor if exists or register, remove this when fixed!
+2024-08-06 10:00:36.430 | DEBUG    | paddlespeech.s2t:<module>:228 - register user repeat to paddle.Tensor, remove this when fixed!
+2024-08-06 10:00:36.430 | DEBUG    | paddlespeech.s2t:<module>:234 - register user softmax to paddle.Tensor, remove this when fixed!
+2024-08-06 10:00:36.430 | DEBUG    | paddlespeech.s2t:<module>:244 - register user relu to paddle.Tensor, remove this when fixed!
+2024-08-06 10:00:36.432 | DEBUG    | paddlespeech.s2t:<module>:253 - register user type_as to paddle.Tensor, remove this when fixed!
+2024-08-06 10:00:36.432 | DEBUG    | paddlespeech.s2t:<module>:280 - register user float to paddle.Tensor, remove this when fixed!
+2024-08-06 10:00:36.432 | DEBUG    | paddlespeech.s2t:<module>:291 - register user int to paddle.Tensor, remove this when fixed!
+2024-08-06 10:47:16.679 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:222 - Vocab: ['<blank>',
  '<unk>',
  '<space>',
  'A',
@@ -5550,266 +5550,38 @@
  '龛',
  '龟',
  '<eos>']
-2024-08-05 23:48:47.184 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:236 - BLANK id: 0
-2024-08-05 23:48:47.185 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:237 - UNK id: 1
-2024-08-05 23:48:47.185 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:238 - EOS id: 5537
-2024-08-05 23:48:47.185 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:239 - SOS id: 5537
-2024-08-05 23:48:47.185 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:240 - SPACE id: 2
-2024-08-05 23:48:47.185 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:241 - MASKCTC id: -1
-2024-08-05 23:48:47.315 | INFO     | paddlespeech.s2t.modules.ctc:<module>:45 - paddlespeech_ctcdecoders not installed!
-2024-08-05 23:48:47.412 | DEBUG    | paddlespeech.s2t.models.u2.u2:_init_from_config:901 - U2 Encoder type: conformer
-2024-08-05 23:48:48.015 | INFO     | paddlespeech.s2t.modules.embedding:__init__:153 - max len: 5000
-2024-08-05 23:48:48.266 | DEBUG    | paddlespeech.s2t.models.u2.u2:_init_from_config:916 - U2 Decoder type: bitransformer
-2024-08-05 23:48:48.461 | DEBUG    | paddlespeech.s2t.modules.loss:__init__:40 - CTCLoss Loss reduction: sum, div-bs: True
-2024-08-05 23:48:48.461 | DEBUG    | paddlespeech.s2t.modules.loss:__init__:42 - CTCLoss Grad Norm Type: None
-2024-08-05 23:48:48.462 | DEBUG    | paddlespeech.s2t.modules.loss:__init__:73 - CTCLoss() kwargs:{'norm_by_times': False}, not support: {'norm_by_batchsize': False, 'norm_by_total_logits_len': False}
-2024-08-05 23:48:51.315 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:563 - hyps pad: Tensor(shape=[10, 8], dtype=int64, place=Place(gpu:0), stop_gradient=True,
-       [[5537, 2085, 217 , 1077, 217 , 2085, 4492, 5537],
-        [5537, 217 , 1077, 217 , 2085, 4492, 5537, 5537],
-        [5537, 2085, 217 , 1077, 217 , 2085, 2461, 5537],
-        [5537, 2085, 217 , 1077, 217 , 2085, 1311, 5537],
-        [5537, 2085, 296 , 1077, 217 , 2085, 4492, 5537],
-        [5537, 217 , 1077, 217 , 2085, 2461, 5537, 5537],
-        [5537, 217 , 1077, 217 , 2085, 1311, 5537, 5537],
-        [5537, 2085, 217 , 1077, 217 , 2085, 4492, 3957],
-        [5537, 4481, 217 , 1077, 217 , 2085, 4492, 5537],
-        [5537, 2085, 217 , 1077, 217 , 2085, 4492, 526 ]]) 5537 5537 -1
-2024-08-05 23:48:51.577 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 0 len 6 l2r score: -1.6508264541625977 ctc_score: -1.965863633096701 reverse_weight: 0.0
-2024-08-05 23:48:51.577 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 1 len 5 l2r score: -2.5092344284057617 ctc_score: -2.643201692628696 reverse_weight: 0.0
-2024-08-05 23:48:51.577 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 2 len 6 l2r score: -2.6993837356567383 ctc_score: -2.9036398493956037 reverse_weight: 0.0
-2024-08-05 23:48:51.578 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 3 len 6 l2r score: -8.935032367706299 ctc_score: -2.9439686946684844 reverse_weight: 0.0
-2024-08-05 23:48:51.578 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 4 len 6 l2r score: -4.251898765563965 ctc_score: -3.4944994723766256 reverse_weight: 0.0
-2024-08-05 23:48:51.579 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 5 len 5 l2r score: -3.6339263916015625 ctc_score: -3.580977908927599 reverse_weight: 0.0
-2024-08-05 23:48:51.579 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 6 len 5 l2r score: -9.753911018371582 ctc_score: -3.6213067542004795 reverse_weight: 0.0
-2024-08-05 23:48:51.580 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 7 len 7 l2r score: -11.085210800170898 ctc_score: -3.7604881254431586 reverse_weight: 0.0
-2024-08-05 23:48:51.580 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 8 len 6 l2r score: -3.7463297843933105 ctc_score: -4.079194997731684 reverse_weight: 0.0
-2024-08-05 23:48:51.580 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 9 len 7 l2r score: -10.939874649047852 ctc_score: -4.121346092243158 reverse_weight: 0.0
-2024-08-05 23:48:51.581 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:608 - result: ((2085, 217, 1077, 217, 2085, 4492), -1.965863633096701)
-2024-08-05 23:49:56.876 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:563 - hyps pad: Tensor(shape=[10, 6], dtype=int64, place=Place(gpu:0), stop_gradient=True,
-       [[5537, 30  , 620 , 5295, 2085, 4492],
-        [5537, 5011, 620 , 5295, 2085, 4492],
-        [5537, 30  , 620 , 1512, 2085, 4492],
-        [5537, 5011, 620 , 1512, 2085, 4492],
-        [5537, 30  , 620 , 5295, 2085, 2461],
-        [5537, 5011, 620 , 5295, 2085, 2461],
-        [5537, 30  , 620 , 5295, 4389, 4492],
-        [5537, 30  , 620 , 217 , 2085, 4492],
-        [5537, 5011, 620 , 5295, 4389, 4492],
-        [5537, 5011, 620 , 217 , 2085, 4492]]) 5537 5537 -1
-2024-08-05 23:49:56.900 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 0 len 5 l2r score: -3.0862531661987305 ctc_score: -2.050927576892235 reverse_weight: 0.0
-2024-08-05 23:49:56.900 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 1 len 5 l2r score: -6.543148994445801 ctc_score: -2.149609600020895 reverse_weight: 0.0
-2024-08-05 23:49:56.900 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 2 len 5 l2r score: -8.63807201385498 ctc_score: -3.058406447825479 reverse_weight: 0.0
-2024-08-05 23:49:56.901 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 3 len 5 l2r score: -10.545867919921875 ctc_score: -3.157088470954139 reverse_weight: 0.0
-2024-08-05 23:49:56.901 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 4 len 5 l2r score: -3.3007850646972656 ctc_score: -3.505750200818368 reverse_weight: 0.0
-2024-08-05 23:49:56.901 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 5 len 5 l2r score: -7.035487174987793 ctc_score: -3.604432223947028 reverse_weight: 0.0
-2024-08-05 23:49:56.901 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 6 len 5 l2r score: -8.546715259552002 ctc_score: -3.6915924754485694 reverse_weight: 0.0
-2024-08-05 23:49:56.902 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 7 len 5 l2r score: -2.277073860168457 ctc_score: -3.7771618704085745 reverse_weight: 0.0
-2024-08-05 23:49:56.902 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 8 len 5 l2r score: -11.905723571777344 ctc_score: -3.7902744985772294 reverse_weight: 0.0
-2024-08-05 23:49:56.903 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 9 len 5 l2r score: -5.34650993347168 ctc_score: -3.8758438935372346 reverse_weight: 0.0
-2024-08-05 23:49:56.903 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:608 - result: ((30, 620, 5295, 2085, 4492), -2.050927576892235)
-2024-08-05 23:50:07.703 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:563 - hyps pad: Tensor(shape=[10, 9], dtype=int64, place=Place(gpu:0), stop_gradient=True,
-       [[5537, 217 , 1077, 4484, 5079, 217 , 2085, 4492, 5537],
-        [5537, 296 , 1077, 4484, 5079, 217 , 2085, 4492, 5537],
-        [5537, 1634, 1077, 4484, 5079, 217 , 2085, 4492, 5537],
-        [5537, 1266, 217 , 1077, 4484, 5079, 217 , 2085, 4492],
-        [5537, 1720, 217 , 1077, 4484, 5079, 217 , 2085, 4492],
-        [5537, 217 , 217 , 1077, 4484, 5079, 217 , 2085, 4492],
-        [5537, 1266, 296 , 1077, 4484, 5079, 217 , 2085, 4492],
-        [5537, 1720, 296 , 1077, 4484, 5079, 217 , 2085, 4492],
-        [5537, 217 , 1077, 4484, 5079, 217 , 2085, 2461, 5537],
-        [5537, 217 , 1077, 4484, 5079, 217 , 2085, 4492, 4492]]) 5537 5537 -1
-2024-08-05 23:50:07.732 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 0 len 7 l2r score: -0.6625299453735352 ctc_score: -0.4875012383241199 reverse_weight: 0.0
-2024-08-05 23:50:07.732 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 1 len 7 l2r score: -4.758270740509033 ctc_score: -1.553376725949922 reverse_weight: 0.0
-2024-08-05 23:50:07.732 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 2 len 7 l2r score: -3.1674880981445312 ctc_score: -3.848695534845616 reverse_weight: 0.0
-2024-08-05 23:50:07.732 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 3 len 8 l2r score: -11.179438591003418 ctc_score: -3.977468429864225 reverse_weight: 0.0
-2024-08-05 23:50:07.732 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 4 len 8 l2r score: -11.7400541305542 ctc_score: -4.391029370216791 reverse_weight: 0.0
-2024-08-05 23:50:07.733 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 5 len 8 l2r score: -10.522403717041016 ctc_score: -5.003074498971247 reverse_weight: 0.0
-2024-08-05 23:50:07.733 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 6 len 8 l2r score: -16.806954383850098 ctc_score: -5.041301962084556 reverse_weight: 0.0
-2024-08-05 23:50:07.733 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 7 len 8 l2r score: -16.932937622070312 ctc_score: -5.45486290243712 reverse_weight: 0.0
-2024-08-05 23:50:07.733 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 8 len 7 l2r score: -6.023097991943359 ctc_score: -8.421165054855098 reverse_weight: 0.0
-2024-08-05 23:50:07.733 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 9 len 8 l2r score: -10.498714447021484 ctc_score: -8.850244560567543 reverse_weight: 0.0
-2024-08-05 23:50:07.734 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:608 - result: ((217, 1077, 4484, 5079, 217, 2085, 4492), -0.4875012383241199)
-2024-08-05 23:56:22.505 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:563 - hyps pad: Tensor(shape=[10, 85], dtype=int64, place=Place(gpu:0), stop_gradient=True,
-       [[5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         1124, 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         1124, 783 , 415 , 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 3221, 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         1124, 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 3221, 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         1124, 783 , 415 , 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         38  , 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 3185, 4765, 2085, 1720, 3185,
-         1124, 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         38  , 783 , 415 , 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 3221, 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         38  , 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 3185, 4765, 2085, 1720, 3185,
-         1124, 783 , 415 , 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 3221, 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 3185, 4765, 2085, 1720, 3185,
-         1124, 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ]]) 5537 5537 -1
-2024-08-05 23:56:22.565 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 0 len 84 l2r score: -138.7869758605957 ctc_score: -24.499346055217583 reverse_weight: 0.0
-2024-08-05 23:56:22.566 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 1 len 84 l2r score: -140.55288743972778 ctc_score: -24.536110200115044 reverse_weight: 0.0
-2024-08-05 23:56:22.567 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 2 len 84 l2r score: -140.48753690719604 ctc_score: -24.554788685478833 reverse_weight: 0.0
-2024-08-05 23:56:22.567 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 3 len 84 l2r score: -142.42135953903198 ctc_score: -24.591552830376294 reverse_weight: 0.0
-2024-08-05 23:56:22.568 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 4 len 84 l2r score: -149.20274877548218 ctc_score: -24.611355833001635 reverse_weight: 0.0
-2024-08-05 23:56:22.568 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 5 len 84 l2r score: -140.43630647659302 ctc_score: -24.64251738026892 reverse_weight: 0.0
-2024-08-05 23:56:22.568 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 6 len 84 l2r score: -150.7865686416626 ctc_score: -24.648119977899096 reverse_weight: 0.0
-2024-08-05 23:56:22.568 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 7 len 84 l2r score: -151.27403926849365 ctc_score: -24.666798463262886 reverse_weight: 0.0
-2024-08-05 23:56:22.569 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 8 len 84 l2r score: -141.71844625473022 ctc_score: -24.67928152516638 reverse_weight: 0.0
-2024-08-05 23:56:22.569 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 9 len 84 l2r score: -141.98370885849 ctc_score: -24.69796001053017 reverse_weight: 0.0
-2024-08-05 23:56:22.569 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:608 - result: ((422, 2181, 791, 654, 38, 1043, 1428, 1307, 38, 1043, 1713, 1278, 90, 1522, 1940, 3483, 2083, 1042, 3229, 147, 1771, 4851, 58, 285, 1999, 99, 1720, 4481, 217, 3119, 99, 147, 30, 2381, 1043, 2004, 1677, 99, 147, 157, 67, 1720, 928, 4481, 147, 4764, 2085, 5346, 147, 1720, 4647, 147, 1471, 2979, 3483, 99, 608, 1771, 1795, 3432, 3643, 442, 99, 1771, 147, 640, 1530, 4765, 2085, 1720, 3185, 1124, 783, 1307, 38, 1043, 3211, 3221, 1901, 3038, 3038, 593, 1777, 99), -24.499346055217583)
-2024-08-05 23:57:11.212 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:563 - hyps pad: Tensor(shape=[10, 85], dtype=int64, place=Place(gpu:0), stop_gradient=True,
-       [[5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         1124, 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         1124, 783 , 415 , 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 3221, 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         1124, 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 3221, 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         1124, 783 , 415 , 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         38  , 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 3185, 4765, 2085, 1720, 3185,
-         1124, 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         38  , 783 , 415 , 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 3221, 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 1530, 4765, 2085, 1720, 3185,
-         38  , 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 608 , 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 3185, 4765, 2085, 1720, 3185,
-         1124, 783 , 415 , 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ],
-        [5537, 422 , 2181, 791 , 654 , 38  , 1043, 1428, 1307, 38  , 1043, 1713,
-         1278, 90  , 1522, 1940, 3483, 2083, 1042, 3229, 147 , 1771, 4851, 58  ,
-         285 , 1999, 99  , 1720, 4481, 217 , 3119, 99  , 147 , 30  , 2381, 1043,
-         2004, 1677, 99  , 147 , 157 , 67  , 1720, 928 , 4481, 147 , 4764, 2085,
-         5346, 147 , 1720, 4647, 147 , 1471, 2979, 3483, 99  , 3221, 1771, 1795,
-         3432, 3643, 442 , 99  , 1771, 147 , 640 , 3185, 4765, 2085, 1720, 3185,
-         1124, 783 , 1307, 38  , 1043, 3211, 3221, 1901, 3038, 3038, 593 , 1777,
-         99  ]]) 5537 5537 -1
-2024-08-05 23:57:11.253 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 0 len 84 l2r score: -138.7869758605957 ctc_score: -24.499346055217583 reverse_weight: 0.0
-2024-08-05 23:57:11.254 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 1 len 84 l2r score: -140.55288743972778 ctc_score: -24.536110200115044 reverse_weight: 0.0
-2024-08-05 23:57:11.254 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 2 len 84 l2r score: -140.48753690719604 ctc_score: -24.554788685478833 reverse_weight: 0.0
-2024-08-05 23:57:11.254 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 3 len 84 l2r score: -142.42135953903198 ctc_score: -24.591552830376294 reverse_weight: 0.0
-2024-08-05 23:57:11.255 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 4 len 84 l2r score: -149.20274877548218 ctc_score: -24.611355833001635 reverse_weight: 0.0
-2024-08-05 23:57:11.255 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 5 len 84 l2r score: -140.43630647659302 ctc_score: -24.64251738026892 reverse_weight: 0.0
-2024-08-05 23:57:11.255 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 6 len 84 l2r score: -150.7865686416626 ctc_score: -24.648119977899096 reverse_weight: 0.0
-2024-08-05 23:57:11.255 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 7 len 84 l2r score: -151.27403926849365 ctc_score: -24.666798463262886 reverse_weight: 0.0
-2024-08-05 23:57:11.256 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 8 len 84 l2r score: -141.71844625473022 ctc_score: -24.67928152516638 reverse_weight: 0.0
-2024-08-05 23:57:11.256 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 9 len 84 l2r score: -141.98370885849 ctc_score: -24.69796001053017 reverse_weight: 0.0
-2024-08-05 23:57:11.256 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:608 - result: ((422, 2181, 791, 654, 38, 1043, 1428, 1307, 38, 1043, 1713, 1278, 90, 1522, 1940, 3483, 2083, 1042, 3229, 147, 1771, 4851, 58, 285, 1999, 99, 1720, 4481, 217, 3119, 99, 147, 30, 2381, 1043, 2004, 1677, 99, 147, 157, 67, 1720, 928, 4481, 147, 4764, 2085, 5346, 147, 1720, 4647, 147, 1471, 2979, 3483, 99, 608, 1771, 1795, 3432, 3643, 442, 99, 1771, 147, 640, 1530, 4765, 2085, 1720, 3185, 1124, 783, 1307, 38, 1043, 3211, 3221, 1901, 3038, 3038, 593, 1777, 99), -24.499346055217583)
+2024-08-06 10:47:16.689 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:236 - BLANK id: 0
+2024-08-06 10:47:16.689 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:237 - UNK id: 1
+2024-08-06 10:47:16.689 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:238 - EOS id: 5537
+2024-08-06 10:47:16.690 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:239 - SOS id: 5537
+2024-08-06 10:47:16.690 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:240 - SPACE id: 2
+2024-08-06 10:47:16.690 | DEBUG    | paddlespeech.s2t.frontend.featurizer.text_featurizer:_load_vocabulary_from_file:241 - MASKCTC id: -1
+2024-08-06 10:47:16.840 | INFO     | paddlespeech.s2t.modules.ctc:<module>:45 - paddlespeech_ctcdecoders not installed!
+2024-08-06 10:47:16.939 | DEBUG    | paddlespeech.s2t.models.u2.u2:_init_from_config:901 - U2 Encoder type: conformer
+2024-08-06 10:47:17.419 | INFO     | paddlespeech.s2t.modules.embedding:__init__:153 - max len: 5000
+2024-08-06 10:47:17.709 | DEBUG    | paddlespeech.s2t.models.u2.u2:_init_from_config:916 - U2 Decoder type: bitransformer
+2024-08-06 10:47:17.915 | DEBUG    | paddlespeech.s2t.modules.loss:__init__:40 - CTCLoss Loss reduction: sum, div-bs: True
+2024-08-06 10:47:17.915 | DEBUG    | paddlespeech.s2t.modules.loss:__init__:42 - CTCLoss Grad Norm Type: None
+2024-08-06 10:47:17.916 | DEBUG    | paddlespeech.s2t.modules.loss:__init__:73 - CTCLoss() kwargs:{'norm_by_times': False}, not support: {'norm_by_batchsize': False, 'norm_by_total_logits_len': False}
+2024-08-06 10:47:20.924 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:563 - hyps pad: Tensor(shape=[10, 9], dtype=int64, place=Place(gpu:0), stop_gradient=True,
+       [[5537, 2020, 1542, 30  , 4402, 1043, 182 , 1041, 99  ],
+        [5537, 2020, 1542, 30  , 3241, 1043, 182 , 1041, 99  ],
+        [5537, 5091, 1542, 30  , 4402, 1043, 182 , 1041, 99  ],
+        [5537, 2020, 2039, 30  , 4402, 1043, 182 , 1041, 99  ],
+        [5537, 772 , 1542, 30  , 4402, 1043, 182 , 1041, 99  ],
+        [5537, 2020, 1542, 30  , 2733, 1043, 182 , 1041, 99  ],
+        [5537, 2020, 5327, 30  , 4402, 1043, 182 , 1041, 99  ],
+        [5537, 5091, 1542, 30  , 3241, 1043, 182 , 1041, 99  ],
+        [5537, 2020, 4741, 30  , 4402, 1043, 182 , 1041, 99  ],
+        [5537, 2020, 1542, 30  , 4402, 1043, 182 , 1041, 5537]]) 5537 5537 -1
+2024-08-06 10:47:21.219 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 0 len 8 l2r score: -1.7998638153076172 ctc_score: -0.529261091000711 reverse_weight: 0.0
+2024-08-06 10:47:21.220 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 1 len 8 l2r score: -2.8617324829101562 ctc_score: -2.553665448542738 reverse_weight: 0.0
+2024-08-06 10:47:21.220 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 2 len 8 l2r score: -3.30233097076416 ctc_score: -2.6661777479206736 reverse_weight: 0.0
+2024-08-06 10:47:21.220 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 3 len 8 l2r score: -4.30332088470459 ctc_score: -3.7204484708135332 reverse_weight: 0.0
+2024-08-06 10:47:21.221 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 4 len 8 l2r score: -4.598210334777832 ctc_score: -3.73279679654554 reverse_weight: 0.0
+2024-08-06 10:47:21.221 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 5 len 8 l2r score: -4.172816276550293 ctc_score: -4.283665196068478 reverse_weight: 0.0
+2024-08-06 10:47:21.221 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 6 len 8 l2r score: -4.982129096984863 ctc_score: -4.655829405286824 reverse_weight: 0.0
+2024-08-06 10:47:21.222 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 7 len 8 l2r score: -4.138283729553223 ctc_score: -4.671047642022032 reverse_weight: 0.0
+2024-08-06 10:47:21.222 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 8 len 8 l2r score: -5.9553608894348145 ctc_score: -4.682700174500333 reverse_weight: 0.0
+2024-08-06 10:47:21.223 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:587 - hyp 9 len 7 l2r score: -8.46678352355957 ctc_score: -6.354917142896869 reverse_weight: 0.0
+2024-08-06 10:47:21.223 | DEBUG    | paddlespeech.s2t.models.u2.u2:attention_rescoring:608 - result: ((2020, 1542, 30, 4402, 1043, 182, 1041, 99), -0.529261091000711)

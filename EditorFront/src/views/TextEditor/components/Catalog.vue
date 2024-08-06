@@ -121,7 +121,7 @@
 </template>
 
 <script setup lang="ts" name="Catalog">
-  import { onMounted, ref, reactive } from 'vue'
+  import { onMounted, ref } from 'vue'
   import axios from "axios"
   import remixiconUrl from 'remixicon/fonts/remixicon.symbol.svg'
 
@@ -138,11 +138,11 @@
   const currentFile = ref("")
   const currentFileID = ref(0)
   const rightClickFileID = ref(0)
-  const dropdownList = reactive({
-    "rename": {name: "重命名", action: props.showRenameFile},
-    "delete": {name: "删除", action: ()=>{}},
-    "share": {name: "共享", action: ()=>{}},
-  })
+  // const dropdownList = reactive({
+  //   "rename": {name: "重命名", action: props.showRenameFile},
+  //   "delete": {name: "删除", action: ()=>{}},
+  //   "share": {name: "共享", action: ()=>{}},
+  // })
   const getFileNameById = (id) => {
     const file = filenameList.value.find(file => file.id === id);
     return file ? file.name : null;
